@@ -1,75 +1,78 @@
-# Nuxt Minimal Starter
+# Track-5Sem2025Front
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This project uses [Nuxt 3](https://nuxt.com/docs/getting-started/introduction), a framework based on Vue.js for modern and efficient web applications. It also integrates Tailwind CSS for styling and follows a modular structure to facilitate development and maintenance.
 
-## Setup
+## 🚀 Setup
 
-Make sure to install dependencies:
+Make sure to install the dependencies before starting the project:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+## 🛠️ Development Server
 
-Start the development server on `http://localhost:3000`:
+To start the development server and test the application locally:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
+The server will start at http://localhost:3000.
 
-## Production
+## 📦 Production
 
-Build the application for production:
+To generate an optimized version for production:
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
-
-Locally preview production build:
+To preview the production version locally:
 
 ```bash
-# npm
 npm run preview
+```
+Refer to the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more details.
 
-# pnpm
-pnpm preview
+## 📁 Project Structure
 
-# yarn
-yarn preview
-
-# bun
-bun run preview
+```bash
+Track-5Sem2025Front/
+├─ .nuxt/                # Automatically generated directory by Nuxt (cache, types, and internal configs)
+├─ .output/              # Files generated after the build
+├─ assets/               # Static files like images and data
+├─ components/           # Reusable Vue components
+├─ composables/          # Reusable functions (e.g., data fetching)
+├─ layouts/              # Global layouts (e.g., navbar or footer)
+├─ pages/                # Project pages (e.g., home or login)
+├─ public/               # Public files (e.g., favicon or logos)
+├─ server/               # Backend API with endpoints in TypeScript
+│  ├─ api/
+│  │  └─ hello.ts        # Example API endpoint
+├─ utils/                # Helper functions (e.g., routes or formatting)
+├─ app.config.ts         # Application configurations
+├─ app.vue               # Root component of the project
+├─ nuxt.config.ts        # Global Nuxt configuration
+├─ tailwind.config.ts    # Tailwind CSS configuration
+├─ tsconfig.json         # TypeScript configuration
+└─ README.md             # Project documentation
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+For more details on the Nuxt structure, visit the [directory structure](https://nuxt.com/docs/guide/directory-structure).
+
+## 🌐 Technologies Used
+<a href="https://nuxt.com" target="_blank">
+    <img src="https://img.shields.io/badge/-Nuxt-black?style=flat-square&logo=nuxt"/>
+</a>
+<a href="https://www.typescriptlang.org/" target="_blank">
+    <img src="https://img.shields.io/badge/-Typescript-black?style=flat-square&logo=typescript"/>
+</a>
+<a href="https://tailwindcss.com/" target="_blank">
+    <img src="https://img.shields.io/badge/-Tailwind-black?style=flat-square&logo=tailwindcss"/>
+</a>
+<a href="https://vuejs.org/" target="_blank">
+    <img src="https://img.shields.io/badge/-Vue-black?style=flat-square&logo=vue.js"/>
+</a>
+
+## 📖 More Information
+
+For more details on Nuxt, visit the [official documentation](https://nuxt.com/docs/getting-started/introduction).

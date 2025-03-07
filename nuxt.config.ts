@@ -6,6 +6,16 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'light'
   },
+  vite: {
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
+    optimizeDeps: {
+      include: ["some-package"],
+    },
+  },
   components: [
     {
       path: '~/components',

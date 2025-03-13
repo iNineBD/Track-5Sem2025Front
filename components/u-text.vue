@@ -48,7 +48,7 @@
       'text-yellow-500': props.color === 'warning',
       'text-blue-400': props.color === 'info',
     },
-    attrs.class, // Permite adicionar classes extras via `class=""` no componente
+    attrs.class,
   ]);
   </script>
   

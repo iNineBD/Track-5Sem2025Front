@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import Navbar from "../../components/navbar.vue";
+import Navbar from "../../components/the-header/the-header.vue";
 import routes from "../../utils/routes";
 
 describe("Navbar.vue", () => {

@@ -11,7 +11,7 @@ useHead({
     </UText>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <UCard class="w-full" v-for="n in 15">
+      <UCard class="w-full" v-for="(n, index) in 15" :key="index">
         <template #header>
           <UText tag="h1" size="large" color="primary" weight="bold">
             large

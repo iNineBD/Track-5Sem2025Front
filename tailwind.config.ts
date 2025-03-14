@@ -5,20 +5,33 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {
+        purple: {
+          50:  '#E6E1F5',
+          100: '#CDC3EB',
+          200: '#B3A4E1',
+          300: '#9985D7',
+          400: '#7F66CD',
+          500: '#6648C3',
+          600: '#4E30B0',
+          700: '#3D248F',
+          800: '#2F1682',
+          900: '#261263',
+          950: '#1A0D46'
+        },
         primary: {
-          DEFAULT: 'violet-500',
-          50: 'violet-50',
-          100: 'violet-100',
-          200: 'violet-200',
-          300: 'violet-300',
-          400: 'violet-400',
-          500: 'violet-500',
-          600: 'violet-600',
-          700: 'violet-700',
-          800: 'violet-800',
-          900: 'violet-900',
-          950: 'violet-950',
-        }
+          DEFAULT: 'purple-500',
+          50: 'purple-50',
+          100: 'purple-100',
+          200: 'purple-200',
+          300: 'purple-300',
+          400: 'purple-400',
+          500: 'purple-500',
+          600: 'purple-600',
+          700: 'purple-700',
+          800: 'purple-800',
+          900: 'purple-900',
+          950: 'purple-950',
+        },
       }
     }
   }

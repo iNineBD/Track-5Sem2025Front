@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import routes from '../../utils/routes'
+import users from '~/assets/data/users.json';
 
 const isOpen = ref(false)
 </script>
@@ -39,10 +40,10 @@ const isOpen = ref(false)
     </div>
 
     <div class="flex items-center gap-2">
-      <avatar />
+      <avatarDropdown :avatar-alt="users.full_name"/>
 
       <UButton 
-        v-if="routes.length"    
+        v-if="routes.length"
         icon="heroicons:bars-3-16-solid"
         size="sm"
         color="gray"

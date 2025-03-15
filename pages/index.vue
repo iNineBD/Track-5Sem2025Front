@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import projects from '~/assets/data/projects.json';
+
 useHead({
   title: 'Home - Track'
 });
@@ -10,24 +12,19 @@ useHead({
       Meus Projetos
     </UText>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <UCard class="w-full" v-for="(n, index) in 15" :key="index">
-        <template #header>
-          <UText tag="h1" size="large" color="primary" weight="bold">
-            large
-          </UText>
-        </template>
-
-        <UText tag="h1" size="medium" weight="normal">
-          medium
-        </UText>
-
-        <template #footer>
-          <UText tag="h1" size="small" weight="normal">
-            small
-          </UText>
-        </template>
-      </UCard>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <ProjectCard
+        v-for="project in projects.projects"
+        :key="project.id_project"
+        :title="project.name"
+        :description="project.description"
+        :created-at="project.created_date"
+        :modified-at="project.modified_date" 
+        :total-cards="project.total_cards"
+        :picture="project.picture"
+        :members="project.members"
+        :product-manager="project.product_manager"
+      />
     </div>
   </div>
 </template>

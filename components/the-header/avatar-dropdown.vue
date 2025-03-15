@@ -2,6 +2,11 @@
 import { useColorMode } from '#imports'
 import { computed } from 'vue'
 
+const props = defineProps<{
+  avatarAlt: string;
+  avatarScr?: string;
+}>()
+
 const colorMode = useColorMode()
 
 const isDark = computed({
@@ -15,21 +20,28 @@ const isDark = computed({
 
 const items = computed(() => [
   [{
-    label: 'Meu Perfil',
+    label: props.avatarAlt,
     avatar: {
-      alt: 'Meu Perfil',
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
+      alt: props.avatarAlt,
+      src: props.avatarScr,
     },
     disabled: true,
     click: () => {
-      console.log('Edit')
+      console.log('Meu perfil')
     }
-  }], 
+  }],
   [{
     label: 'Theme',
     icon: isDark.value ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid',
     click: () => {
       colorMode.preference = isDark.value ? 'light' : 'dark'
+    }
+  }],
+  [{
+    label: 'Sair',
+    icon: 'heroicons:arrow-right-start-on-rectangle-20-solid',
+    click: () => {
+      navigateTo('/login')
     }
   }]
 ])
@@ -37,6 +49,8 @@ const items = computed(() => [
 
 <template>
   <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
-    <UAvatar alt="Ali Mohamed" size="sm" />
+    <UAvatar :alt="props.avatarAlt" :src="props.avatarScr" size="sm" :ui="{
+      background: 'bg-[color]'
+    }" />
   </UDropdown>
 </template>

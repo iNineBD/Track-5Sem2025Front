@@ -1,0 +1,10 @@
+{
+  "id_user": 1,
+  "full_name": "Alice Johnson",
+  "color": "#50d71e",
+  "email": "alice@example.com",
+  "role": {
+    "id_role": 1,
+    "name": "Admin"
+  }
+}

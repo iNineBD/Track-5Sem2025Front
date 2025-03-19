@@ -53,7 +53,7 @@ const isOpen = ref(false)
       />
     </div>
 
-    <USlideover class="max-w-36 ml-auto" v-model="isOpen">
+    <USlideover v-model="isOpen" class="max-w-36 ml-auto">
       <div class="p-4 flex flex-col h-full">
         <UButton
           icon="i-heroicons-x-mark-20-solid"
@@ -72,8 +72,8 @@ const isOpen = ref(false)
                 :color="$route.path === item.to ? 'primary' : 'gray'"
                 variant="ghost"
                 class="w-full font-bold"
-                @click="isOpen = false"
                 size="lg"
+                @click="isOpen = false"
               >
                 {{ item.label }}
               </UButton>

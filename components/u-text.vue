@@ -15,7 +15,7 @@
   const props = withDefaults(defineProps<{
     tag?: string;
     align?: 'left' | 'center' | 'right';
-    size?: 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large';
+    size?: 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large' | 'title';
     weight?: 'normal' | 'medium' | 'semi-bold' | 'bold';
     color?: 'inherit' | 'primary' | 'white' | 'success' | 'danger' | 'warning' | 'info';
   }>(), {
@@ -36,7 +36,8 @@
       'md:text-sm text-xs': props.size === 'small',
       'md:text-base text-sm': props.size === 'medium',
       'md:text-lg text-base': props.size === 'large',
-      'md:text-2xl text-lg': props.size === 'extra-large',
+      'md:text-2xl text-xl': props.size === 'extra-large',
+      'md:text-3xl text-2xl': props.size === 'title',
       'font-normal': props.weight === 'normal',
       'font-medium': props.weight === 'medium',
       'font-semibold': props.weight === 'semi-bold',
@@ -51,4 +52,3 @@
     attrs.class,
   ]);
   </script>
-  

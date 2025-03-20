@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import routes from '../../utils/routes'
-import users from '~/assets/data/users.json';
+import users from '../../assets/data/users.json';
 
 const isOpen = ref(false)
 </script>

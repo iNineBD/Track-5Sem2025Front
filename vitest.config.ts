@@ -1,9 +1,15 @@
-import { defineConfig } from 'vitest/config';
-import vue from '@vitejs/plugin-vue';
+import { defineVitestConfig } from '@nuxt/test-utils/config'
 
-export default defineConfig({
+export default defineVitestConfig({
   test: {
-    environment: 'jsdom',
-  },
-  plugins: [vue()],
-});
+    environment: 'nuxt',
+    environmentOptions: {
+      nuxt: {
+        mock: {
+          intersectionObserver: true,
+          indexedDb: true,
+        }
+      }
+    }
+  }
+})

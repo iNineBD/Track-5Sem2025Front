@@ -49,8 +49,6 @@ const items = computed(() => [
 
 <template>
   <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
-    <UAvatar :alt="props.avatarAlt" :src="props.avatarScr" size="sm" :ui="{
-      background: 'bg-[color]'
-    }" />
+    <UAvatar :alt="props.avatarAlt" :src="props.avatarScr" size="sm"/>
   </UDropdown>
 </template>

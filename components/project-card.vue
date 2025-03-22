@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Project } from '~/types';
-import { formatDate, differenceBetweenDays, daysAgo } from '~/utils';
+import type { Project } from '~/types'
+import { formatDate, differenceBetweenDays, daysAgo } from '~/utils'
 
 const props = defineProps<{
-  project: Project;
-}>();
+  project: Project
+}>()
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const props = defineProps<{
   >
     <template #header>
       <div class="flex flex-row items-center space-x-4">
-        <UAvatar 
+        <UAvatar
           :alt="project.name"
           size="3xl"
         />
@@ -38,15 +38,18 @@ const props = defineProps<{
       </div>
     </template>
     <div class="flex flex-col space-y-4 items-start">
-      <UBadge :color="project.finish_date ? 'green' : 'yellow'" :label="project.finish_date ? 'Finalizado' : 'Em andamento'" />
-      <UText 
+      <UBadge
+        :color="project.finish_date ? 'green' : 'yellow'"
+        :label="project.finish_date ? 'Finalizado' : 'Em andamento'"
+      />
+      <UText
         size="medium"
         weight="normal"
         class="mt-2"
       >
         Duração: {{ differenceBetweenDays(props.project.created_date, props.project.finish_date) }} dias
       </UText>
-      <UText 
+      <UText
         size="medium"
         weight="normal"
         class="mt-2"
@@ -55,7 +58,7 @@ const props = defineProps<{
       </UText>
     </div>
     <template #footer>
-      <UText 
+      <UText
         size="small"
         weight="normal"
       >

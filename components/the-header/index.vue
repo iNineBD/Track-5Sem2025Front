@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import routes from '../../utils/routes'
-import users from '../../assets/data/users.json'
+import { ref } from "vue";
+import routes from "../../utils/routes";
+import users from "../../assets/data/users.json";
 
-const isOpen = ref(false)
+const isOpen = ref(false);
 </script>
 
 <template>
-  <header class="flex justify-between items-center p-5 border-b border-neutral-300 dark:border-neutral-700 transition-colors">
+  <header
+    class="flex justify-between items-center p-5 border-b border-neutral-300 dark:border-neutral-700 transition-colors"
+  >
     <div class="flex items-center gap-6">
       <NuxtLink to="/">
         <NuxtImg
@@ -24,10 +26,7 @@ const isOpen = ref(false)
 
       <nav class="hidden md:block">
         <ul class="flex space-x-4">
-          <li
-            v-for="item in routes"
-            :key="item.to"
-          >
+          <li v-for="item in routes" :key="item.to">
             <UButton
               :to="item.to"
               :color="$route.path === item.to ? 'primary' : 'gray'"
@@ -57,10 +56,7 @@ const isOpen = ref(false)
       />
     </div>
 
-    <USlideover
-      v-model="isOpen"
-      class="max-w-36 ml-auto"
-    >
+    <USlideover v-model="isOpen" class="max-w-36 ml-auto">
       <div class="p-4 flex flex-col h-full">
         <UButton
           icon="i-heroicons-x-mark-20-solid"
@@ -73,10 +69,7 @@ const isOpen = ref(false)
         />
         <nav class="mt-10">
           <ul class="flex flex-col space-y-4">
-            <li
-              v-for="item in routes"
-              :key="item.to"
-            >
+            <li v-for="item in routes" :key="item.to">
               <UButton
                 :to="item.to"
                 :color="$route.path === item.to ? 'primary' : 'gray'"

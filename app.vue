@@ -10,5 +10,6 @@ import routes from './utils/routes'
 >
   <NuxtLayout>
     <NuxtPage />
+    <UNotifications />
   </NuxtLayout>
 </template>

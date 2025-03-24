@@ -31,7 +31,7 @@ jobs:
 
       # Analisar código com ESLint
       - name: Run ESLint
-        run: npx eslint . --ext .js,.ts,.vue #--fix se adicionar esta opção o código será corrigido auto.
+        run: npx eslint . --ext .js,.ts,.vue --fix
 
       - name: Run tests
         run: npm test

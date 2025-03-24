@@ -1,16 +1,27 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  modules: [
+    '@nuxt/ui',
+    '@nuxt/image',
+    '@nuxt/test-utils/module',
+    '@nuxt/eslint',
+  ],
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@nuxt/image', '@nuxt/test-utils/module'],
+  colorMode: {
+    preference: 'light',
+  },
   runtimeConfig: {
     public: {
-      apiServer: process.env.API_SERVER
-    }
+      apiServer: process.env.API_SERVER,
+    },
   },
-  colorMode: {
-    preference: 'light'
-  },
+  compatibilityDate: '2024-11-01',
   vite: {
     server: {
       watch: {
@@ -18,13 +29,13 @@ export default defineNuxtConfig({
       },
     },
     optimizeDeps: {
-      include: ["some-package"],
+      include: ['some-package'],
     },
   },
-  components: [
-    {
-      path: '~/components',
-      pathPrefix: false,
+  eslint: {
+    checker: true,
+    config: {
+      stylistic: true,
     },
-  ],
+  },
 })

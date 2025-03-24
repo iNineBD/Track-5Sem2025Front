@@ -1,30 +1,35 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import routes from '../../utils/routes'
-import users from '../../assets/data/users.json';
+import users from '../../assets/data/users.json'
 
 const isOpen = ref(false)
 </script>
 
 <template>
-  <header class="flex justify-between items-center p-5 border-b border-neutral-300 dark:border-neutral-700 transition-colors">
+  <header
+    class="flex justify-between items-center p-5 border-b border-neutral-300 dark:border-neutral-700 transition-colors"
+  >
     <div class="flex items-center gap-6">
       <NuxtLink to="/">
-        <NuxtImg 
-          src="/logo-black.svg" 
+        <NuxtImg
+          src="/logo-black.svg"
           alt="Logo"
-          class="h-6 block dark:hidden" 
+          class="h-6 block dark:hidden"
         />
-        <NuxtImg 
-          src="/logo-white.svg" 
-          alt="Logo" 
-          class="h-6 hidden dark:block" 
+        <NuxtImg
+          src="/logo-white.svg"
+          alt="Logo"
+          class="h-6 hidden dark:block"
         />
       </NuxtLink>
 
       <nav class="hidden md:block">
         <ul class="flex space-x-4">
-          <li v-for="item in routes" :key="item.to">
+          <li
+            v-for="item in routes"
+            :key="item.to"
+          >
             <UButton
               :to="item.to"
               :color="$route.path === item.to ? 'primary' : 'gray'"
@@ -40,9 +45,9 @@ const isOpen = ref(false)
     </div>
 
     <div class="flex items-center gap-2">
-      <avatarDropdown :avatar-alt="users.full_name"/>
+      <avatarDropdown :avatar-alt="users.full_name" />
 
-      <UButton 
+      <UButton
         v-if="routes.length"
         icon="heroicons:bars-3-16-solid"
         size="sm"
@@ -50,11 +55,14 @@ const isOpen = ref(false)
         square
         variant="ghost"
         class="md:hidden"
-        @click="isOpen = true" 
+        @click="isOpen = true"
       />
     </div>
 
-    <USlideover class="max-w-36 ml-auto" v-model="isOpen">
+    <USlideover
+      v-model="isOpen"
+      class="max-w-36 ml-auto"
+    >
       <div class="p-4 flex flex-col h-full">
         <UButton
           icon="i-heroicons-x-mark-20-solid"
@@ -67,14 +75,17 @@ const isOpen = ref(false)
         />
         <nav class="mt-10">
           <ul class="flex flex-col space-y-4">
-            <li v-for="item in routes" :key="item.to">
-              <UButton 
-                :to="item.to" 
+            <li
+              v-for="item in routes"
+              :key="item.to"
+            >
+              <UButton
+                :to="item.to"
                 :color="$route.path === item.to ? 'primary' : 'gray'"
                 variant="ghost"
                 class="w-full font-bold"
-                @click="isOpen = false"
                 size="lg"
+                @click="isOpen = false"
               >
                 {{ item.label }}
               </UButton>

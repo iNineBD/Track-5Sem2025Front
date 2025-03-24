@@ -1,12 +1,11 @@
 import type { Config } from 'tailwindcss'
-import defaultTheme from 'tailwindcss/defaultTheme'
 
 export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {
         purple: {
-          50:  '#E6E1F5',
+          50: '#E6E1F5',
           100: '#CDC3EB',
           200: '#B3A4E1',
           300: '#9985D7',
@@ -16,7 +15,7 @@ export default <Partial<Config>>{
           700: '#3D248F',
           800: '#2F1682',
           900: '#261263',
-          950: '#1A0D46'
+          950: '#1A0D46',
         },
         primary: {
           DEFAULT: 'purple-500',
@@ -32,7 +31,7 @@ export default <Partial<Config>>{
           900: 'purple-900',
           950: 'purple-950',
         },
-      }
-    }
-  }
+      },
+    },
+  },
 }

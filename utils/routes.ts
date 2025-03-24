@@ -1,3 +1,3 @@
-const routes = [{ label: "Home", to: "/" }];
+const routes = [{ label: 'Home', to: '/' }]
 
-export default routes;
+export default routes

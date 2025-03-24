@@ -1,22 +1,25 @@
 <script setup lang="ts">
-import type { NuxtError } from "#app";
+import type { NuxtError } from '#app'
 
 withDefaults(
   defineProps<{
-    error?: NuxtError;
+    error?: NuxtError
   }>(),
   {
     error: () => ({
       statusCode: 500,
-      message: "Erro desconhecido",
+      message: 'Erro desconhecido',
     }),
   },
-);
+)
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center">
-    <div v-if="error" class="mb-0 text-primary text-8xl font-bold">
+    <div
+      v-if="error"
+      class="mb-0 text-primary text-8xl font-bold"
+    >
       {{ error.statusCode }}
     </div>
     <UText
@@ -28,7 +31,13 @@ withDefaults(
     >
       {{ error.message }}
     </UText>
-    <UButton to="/" color="primary" variant="solid" size="lg" class="font-bold">
+    <UButton
+      to="/"
+      color="primary"
+      variant="solid"
+      size="lg"
+      class="font-bold"
+    >
       Home
     </UButton>
   </div>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: "login",
-});
+  layout: 'login',
+})
 useHead({
-  title: "Login - Track",
-});
+  title: 'Login - Track',
+})
 </script>
 
 <template>

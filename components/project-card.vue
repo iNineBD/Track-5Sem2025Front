@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Project } from "~/types";
-import { formatDate, differenceBetweenDays, daysAgo } from "~/utils";
+import type { Project } from '~/types'
+import { formatDate, differenceBetweenDays, daysAgo } from '~/utils'
 
 const props = defineProps<{
-  project: Project;
-}>();
+  project: Project
+}>()
 </script>
 
 <template>
@@ -13,7 +13,10 @@ const props = defineProps<{
   >
     <template #header>
       <div class="flex flex-row items-center space-x-4">
-        <UAvatar :alt="project.name" size="3xl" />
+        <UAvatar
+          :alt="project.name"
+          size="3xl"
+        />
         <div>
           <UText
             tag="h2"
@@ -24,7 +27,11 @@ const props = defineProps<{
           >
             {{ project.name }}
           </UText>
-          <UText size="small" weight="normal" class="line-clamp-2">
+          <UText
+            size="small"
+            weight="normal"
+            class="line-clamp-2"
+          >
             {{ project.description }}
           </UText>
         </div>
@@ -35,7 +42,11 @@ const props = defineProps<{
         :color="project.finish_date ? 'green' : 'yellow'"
         :label="project.finish_date ? 'Finalizado' : 'Em andamento'"
       />
-      <UText size="medium" weight="normal" class="mt-2">
+      <UText
+        size="medium"
+        weight="normal"
+        class="mt-2"
+      >
         Duração:
         {{
           differenceBetweenDays(
@@ -45,12 +56,19 @@ const props = defineProps<{
         }}
         dias
       </UText>
-      <UText size="medium" weight="normal" class="mt-2">
+      <UText
+        size="medium"
+        weight="normal"
+        class="mt-2"
+      >
         Última atualização há {{ daysAgo(props.project.modified_date) }} dias
       </UText>
     </div>
     <template #footer>
-      <UText size="small" weight="normal">
+      <UText
+        size="small"
+        weight="normal"
+      >
         {{ formatDate(project.created_date) }}
       </UText>
     </template>

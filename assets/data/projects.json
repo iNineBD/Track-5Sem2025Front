@@ -1,273 +1,272 @@
 {
-    "projects": [
-      {
-        "id_project": 201,
-        "name": "User Management System",
-        "description": "Internal tool for management",
-        "created_date": "2025-01-15T08:30:00Z",
-        "modified_date": "2025-02-01T09:45:00Z",
-        "total_cards": 10,
-        "product_manager":{
-          "id_member": 6,
-          "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-          "alt":"benjamincanac"
-        },
-        "members": [
-          {
-            "id_member": 1,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          }
-        ],
-        "picture": "https://avatars.githubusercontent.com/u/739984?v=4",
-        "user_stories": [
-          {
-            "id_user_story": 101,
-            "description": "Implement login feature",
-            "id_assigned_to": 2,
-            "comment": "Needs review",
-            "created_date": "2025-03-10T10:00:00Z",
-            "due_date": "2025-03-20T10:00:00Z",
-            "finish_date": null,
-            "owner": 1,
-            "status": {
-              "id_status": 1,
-              "name": "In Progress"
-            }
-          }
-        ],
-        "tasks": [
-          {
-            "id_task": 301,
-            "description": "Create database schema",
-            "id_assigned_to": 2,
-            "created_date": "2025-03-11T12:00:00Z",
-            "due_date": "2025-03-18T12:00:00Z",
-            "modified_date": "2025-03-12T14:00:00Z",
-            "total_comments": 2,
-            "status": {
-              "id_status": 1,
-              "name": "To Do"
-            }
-          }
-        ]
+  "projects": [
+    {
+      "id_project": 201,
+      "name": "User Management System",
+      "description": "Internal tool for management",
+      "created_date": "2025-01-15T08:30:00Z",
+      "modified_date": "2025-02-01T09:45:00Z",
+      "total_cards": 10,
+      "product_manager": {
+        "id_member": 6,
+        "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+        "alt": "benjamincanac"
       },
-      {
-        "id_project": 201,
-        "name": "User Management System",
-        "description": "Internal tool for management",
-        "created_date": "2025-01-15T08:30:00Z",
-        "modified_date": "2025-02-01T09:45:00Z",
-        "total_cards": 10,
-        "product_manager":{
-          "id_member": 6,
-          "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-          "alt":"benjamincanac"
+      "members": [
+        {
+          "id_member": 1,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
         },
-        "members": [
-          {
-            "id_member": 1,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        }
+      ],
+      "picture": "https://avatars.githubusercontent.com/u/739984?v=4",
+      "user_stories": [
+        {
+          "id_user_story": 101,
+          "description": "Implement login feature",
+          "id_assigned_to": 2,
+          "comment": "Needs review",
+          "created_date": "2025-03-10T10:00:00Z",
+          "due_date": "2025-03-20T10:00:00Z",
+          "finish_date": null,
+          "owner": 1,
+          "status": {
+            "id_status": 1,
+            "name": "In Progress"
           }
-        ],
-        "picture": "https://avatars.githubusercontent.com/u/739984?v=4",
-        "user_stories": [
-          {
-            "id_user_story": 101,
-            "description": "Implement login feature",
-            "id_assigned_to": 2,
-            "comment": "Needs review",
-            "created_date": "2025-03-10T10:00:00Z",
-            "due_date": "2025-03-20T10:00:00Z",
-            "finish_date": null,
-            "owner": 1,
-            "status": {
-              "id_status": 1,
-              "name": "In Progress"
-            }
+        }
+      ],
+      "tasks": [
+        {
+          "id_task": 301,
+          "description": "Create database schema",
+          "id_assigned_to": 2,
+          "created_date": "2025-03-11T12:00:00Z",
+          "due_date": "2025-03-18T12:00:00Z",
+          "modified_date": "2025-03-12T14:00:00Z",
+          "total_comments": 2,
+          "status": {
+            "id_status": 1,
+            "name": "To Do"
           }
-        ],
-        "tasks": [
-          {
-            "id_task": 301,
-            "description": "Create database schema",
-            "id_assigned_to": 2,
-            "created_date": "2025-03-11T12:00:00Z",
-            "due_date": "2025-03-18T12:00:00Z",
-            "modified_date": "2025-03-12T14:00:00Z",
-            "total_comments": 2,
-            "status": {
-              "id_status": 1,
-              "name": "To Do"
-            }
-          }
-        ]
+        }
+      ]
+    },
+    {
+      "id_project": 201,
+      "name": "User Management System",
+      "description": "Internal tool for management",
+      "created_date": "2025-01-15T08:30:00Z",
+      "modified_date": "2025-02-01T09:45:00Z",
+      "total_cards": 10,
+      "product_manager": {
+        "id_member": 6,
+        "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+        "alt": "benjamincanac"
       },
-      {
-        "id_project": 201,
-        "name": "User Management System",
-        "description": "Internal tool for management",
-        "created_date": "2025-01-15T08:30:00Z",
-        "modified_date": "2025-02-01T09:45:00Z",
-        "total_cards": 10,
-        "product_manager":{
-          "id_member": 6,
-          "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-          "alt":"benjamincanac"
+      "members": [
+        {
+          "id_member": 1,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
         },
-        "members": [
-          {
-            "id_member": 1,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        }
+      ],
+      "picture": "https://avatars.githubusercontent.com/u/739984?v=4",
+      "user_stories": [
+        {
+          "id_user_story": 101,
+          "description": "Implement login feature",
+          "id_assigned_to": 2,
+          "comment": "Needs review",
+          "created_date": "2025-03-10T10:00:00Z",
+          "due_date": "2025-03-20T10:00:00Z",
+          "finish_date": null,
+          "owner": 1,
+          "status": {
+            "id_status": 1,
+            "name": "In Progress"
           }
-        ],
-        "picture": "https://avatars.githubusercontent.com/u/739984?v=4",
-        "user_stories": [
-          {
-            "id_user_story": 101,
-            "description": "Implement login feature",
-            "id_assigned_to": 2,
-            "comment": "Needs review",
-            "created_date": "2025-03-10T10:00:00Z",
-            "due_date": "2025-03-20T10:00:00Z",
-            "finish_date": null,
-            "owner": 1,
-            "status": {
-              "id_status": 1,
-              "name": "In Progress"
-            }
+        }
+      ],
+      "tasks": [
+        {
+          "id_task": 301,
+          "description": "Create database schema",
+          "id_assigned_to": 2,
+          "created_date": "2025-03-11T12:00:00Z",
+          "due_date": "2025-03-18T12:00:00Z",
+          "modified_date": "2025-03-12T14:00:00Z",
+          "total_comments": 2,
+          "status": {
+            "id_status": 1,
+            "name": "To Do"
           }
-        ],
-        "tasks": [
-          {
-            "id_task": 301,
-            "description": "Create database schema",
-            "id_assigned_to": 2,
-            "created_date": "2025-03-11T12:00:00Z",
-            "due_date": "2025-03-18T12:00:00Z",
-            "modified_date": "2025-03-12T14:00:00Z",
-            "total_comments": 2,
-            "status": {
-              "id_status": 1,
-              "name": "To Do"
-            }
-          }
-        ]
+        }
+      ]
+    },
+    {
+      "id_project": 201,
+      "name": "User Management System",
+      "description": "Internal tool for management",
+      "created_date": "2025-01-15T08:30:00Z",
+      "modified_date": "2025-02-01T09:45:00Z",
+      "total_cards": 10,
+      "product_manager": {
+        "id_member": 6,
+        "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+        "alt": "benjamincanac"
       },
-      {
-        "id_project": 201,
-        "name": "User Management System",
-        "description": "Internal tool for management",
-        "created_date": "2025-01-15T08:30:00Z",
-        "modified_date": "2025-02-01T09:45:00Z",
-        "total_cards": 10,
-        "product_manager":{
-          "id_member": 6,
-          "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-          "alt":"benjamincanac"
+      "members": [
+        {
+          "id_member": 1,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
         },
-        "members": [
-          {
-            "id_member": 1,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
-          },
-          {
-            "id_member": 2,
-            "src":"https://avatars.githubusercontent.com/u/739984?v=4",
-            "alt":"benjamincanac"
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        }
+      ],
+      "picture": "https://avatars.githubusercontent.com/u/739984?v=4",
+      "user_stories": [
+        {
+          "id_user_story": 101,
+          "description": "Implement login feature",
+          "id_assigned_to": 2,
+          "comment": "Needs review",
+          "created_date": "2025-03-10T10:00:00Z",
+          "due_date": "2025-03-20T10:00:00Z",
+          "finish_date": null,
+          "owner": 1,
+          "status": {
+            "id_status": 1,
+            "name": "In Progress"
           }
-        ],
-        "picture": "https://avatars.githubusercontent.com/u/739984?v=4",
-        "user_stories": [
-          {
-            "id_user_story": 101,
-            "description": "Implement login feature",
-            "id_assigned_to": 2,
-            "comment": "Needs review",
-            "created_date": "2025-03-10T10:00:00Z",
-            "due_date": "2025-03-20T10:00:00Z",
-            "finish_date": null,
-            "owner": 1,
-            "status": {
-              "id_status": 1,
-              "name": "In Progress"
-            }
+        }
+      ],
+      "tasks": [
+        {
+          "id_task": 301,
+          "description": "Create database schema",
+          "id_assigned_to": 2,
+          "created_date": "2025-03-11T12:00:00Z",
+          "due_date": "2025-03-18T12:00:00Z",
+          "modified_date": "2025-03-12T14:00:00Z",
+          "total_comments": 2,
+          "status": {
+            "id_status": 1,
+            "name": "To Do"
           }
-        ],
-        "tasks": [
-          {
-            "id_task": 301,
-            "description": "Create database schema",
-            "id_assigned_to": 2,
-            "created_date": "2025-03-11T12:00:00Z",
-            "due_date": "2025-03-18T12:00:00Z",
-            "modified_date": "2025-03-12T14:00:00Z",
-            "total_comments": 2,
-            "status": {
-              "id_status": 1,
-              "name": "To Do"
-            }
+        }
+      ]
+    },
+    {
+      "id_project": 201,
+      "name": "User Management System",
+      "description": "Internal tool for management",
+      "created_date": "2025-01-15T08:30:00Z",
+      "modified_date": "2025-02-01T09:45:00Z",
+      "total_cards": 10,
+      "product_manager": {
+        "id_member": 6,
+        "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+        "alt": "benjamincanac"
+      },
+      "members": [
+        {
+          "id_member": 1,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        },
+        {
+          "id_member": 2,
+          "src": "https://avatars.githubusercontent.com/u/739984?v=4",
+          "alt": "benjamincanac"
+        }
+      ],
+      "picture": "https://avatars.githubusercontent.com/u/739984?v=4",
+      "user_stories": [
+        {
+          "id_user_story": 101,
+          "description": "Implement login feature",
+          "id_assigned_to": 2,
+          "comment": "Needs review",
+          "created_date": "2025-03-10T10:00:00Z",
+          "due_date": "2025-03-20T10:00:00Z",
+          "finish_date": null,
+          "owner": 1,
+          "status": {
+            "id_status": 1,
+            "name": "In Progress"
           }
-        ]
-      }
-    ]
-  }
-  
+        }
+      ],
+      "tasks": [
+        {
+          "id_task": 301,
+          "description": "Create database schema",
+          "id_assigned_to": 2,
+          "created_date": "2025-03-11T12:00:00Z",
+          "due_date": "2025-03-18T12:00:00Z",
+          "modified_date": "2025-03-12T14:00:00Z",
+          "total_comments": 2,
+          "status": {
+            "id_status": 1,
+            "name": "To Do"
+          }
+        }
+      ]
+    }
+  ]
+}

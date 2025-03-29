@@ -1,7 +1,4 @@
-<script setup lang="ts">
-import { useRouter } from 'vue-router'
-import routes from './utils/routes'
-</script>
+<script setup lang="ts"></script>
 
 <template
   dir="routing/pages"

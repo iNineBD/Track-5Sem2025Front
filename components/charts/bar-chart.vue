@@ -124,7 +124,8 @@ const option = ref({
   ],
 });
 
-// Atualizar opções dinamicamente
+defineExpose({ option });
+
 watch(formattedData, (newData) => {
   option.value.yAxis.data = newData.map((item) => item.name);
   option.value.series[0].data = newData.map((item) => item.value);

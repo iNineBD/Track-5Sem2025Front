@@ -58,11 +58,6 @@ const chartTitle = computed(() => {
   return "Distribuição de Dados";
 });
 
-// Calcular o total de cards
-const totalCards = computed(() =>
-  formattedData.value.reduce((acc, curr) => acc + curr.value, 0)
-);
-
 // Opções do gráfico
 const option = ref({
   title: {
@@ -97,10 +92,7 @@ const option = ref({
       const offsetX = window.innerWidth - tooltipWidth - 10;
       const offsetY = window.innerHeight - tooltipHeight - 10;
 
-      return [
-        Math.min(x + 10, offsetX), // Ajuste horizontal
-        Math.min(y + 10, offsetY), // Ajuste vertical
-      ];
+      return [Math.min(x + 10, offsetX), Math.min(y + 10, offsetY)];
     },
   },
   legend: {
@@ -154,7 +146,8 @@ const option = ref({
   ],
 });
 
-// Atualizar o gráfico conforme os dados
+defineExpose({ option });
+
 watch(
   formattedData,
   (newData) => {

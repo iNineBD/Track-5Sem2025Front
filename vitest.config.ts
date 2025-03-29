@@ -8,8 +8,8 @@ export default defineVitestConfig({
         mock: {
           intersectionObserver: true,
           indexedDb: true,
-        },
-      },
-    },
-  },
+        }
+      }
+    }
+  }
 })

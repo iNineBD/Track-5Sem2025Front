@@ -10,39 +10,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useAttrs } from 'vue'
+import { computed, useAttrs } from 'vue';
 
-const props = withDefaults(
-  defineProps<{
-    tag?: string
-    align?: 'left' | 'center' | 'right'
-    size?:
-      | 'extra-small'
-      | 'small'
-      | 'medium'
-      | 'large'
-      | 'extra-large'
-      | 'title'
-    weight?: 'normal' | 'medium' | 'semi-bold' | 'bold'
-    color?:
-      | 'inherit'
-      | 'primary'
-      | 'white'
-      | 'success'
-      | 'danger'
-      | 'warning'
-      | 'info'
-  }>(),
-  {
-    tag: 'p',
-    align: 'left',
-    size: 'medium',
-    weight: 'normal',
-    color: 'inherit',
-  },
-)
+const props = withDefaults(defineProps<{
+  tag?: string;
+  align?: 'left' | 'center' | 'right';
+  size?: 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large' | 'title';
+  weight?: 'normal' | 'medium' | 'semi-bold' | 'bold';
+  color?: 'inherit' | 'primary' | 'white' | 'success' | 'danger' | 'warning' | 'info';
+}>(), {
+  tag: 'p',
+  align: 'left',
+  size: 'medium',
+  weight: 'normal',
+  color: 'inherit',
+});
 
-const attrs = useAttrs()
+const attrs = useAttrs();
 
 const ui = computed(() => [
   {
@@ -68,5 +52,5 @@ const ui = computed(() => [
     'text-blue-400': props.color === 'info',
   },
   attrs.class,
-])
+]);
 </script>

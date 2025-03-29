@@ -17,7 +17,6 @@ To start the development server and test the application locally:
 ```bash
 npm run dev
 ```
-
 The server will start at http://localhost:3000.
 
 ## 📦 Production
@@ -27,13 +26,11 @@ To generate an optimized version for production:
 ```bash
 npm run build
 ```
-
 To preview the production version locally:
 
 ```bash
 npm run preview
 ```
-
 Refer to the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more details.
 
 ## 📁 Project Structure
@@ -63,7 +60,6 @@ Track-5Sem2025Front/
 For more details on the Nuxt structure, visit the [directory structure](https://nuxt.com/docs/guide/directory-structure).
 
 ## 🌐 Technologies Used
-
 <a href="https://nuxt.com" target="_blank">
     <img src="https://img.shields.io/badge/-Nuxt-black?style=flat-square&logo=nuxt"/>
 </a>

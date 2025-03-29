@@ -52,9 +52,15 @@ const totalCards = computed(() => calculateTotal(CardTag.value));
     </template>
 
     <template v-else>
-      <PieChart :card-tag="CardTag" />
-      <PieChart :card-status="CardStatus" />
-      <BarChart :card-user="CardUser" />
+      <div class="rounded-lg ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900 w-full hover:scale-[1.02] hover:border border-gray-200 dark:border-gray-700 duration-300 ease-in cursor-pointer">
+        <PieChart :card-tag="CardTag" />
+      </div>
+      <div class="rounded-lg ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900 w-full hover:scale-[1.02] hover:border border-gray-200 dark:border-gray-700 duration-300 ease-in cursor-pointer">
+        <PieChart :card-status="CardStatus" />
+      </div>
+      <div class="rounded-lg ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900 w-full hover:scale-[1.02] hover:border border-gray-200 dark:border-gray-700 duration-300 ease-in cursor-pointer">
+        <BarChart :card-user="CardUser" />
+      </div>
     </template>
   </div>
 </template>

@@ -11,7 +11,6 @@ export default defineNuxtConfig({
   colorMode: {
     preference: "light",
   },
-  compatibilityDate: '2024-11-01',
   vite: {
     server: {
       watch: {
@@ -19,7 +18,7 @@ export default defineNuxtConfig({
       },
     },
     optimizeDeps: {
-      include: ['some-package'],
+      include: ["some-package"],
     },
   },
   components: [

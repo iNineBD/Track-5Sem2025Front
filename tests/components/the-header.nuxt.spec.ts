@@ -29,4 +29,5 @@ describe('TheHeader', () => {
     expect(avatarDropdown.exists()).toBe(true)
     expect(avatarDropdown.props('avatarAlt')).toBeDefined()
   })
+
 })

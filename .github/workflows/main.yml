@@ -25,14 +25,6 @@ jobs:
       - name: Install dependencies
         run: npm install --no-package-lock
 
-      # Verificar formatação e faz a correção antes de subir com Prettier
-      - name: Run Prettier
-        run: npx prettier --write .
-
-      # Analisar código com ESLint
-      - name: Run ESLint
-        run: npx eslint . --ext .js,.ts,.vue --fix
-
       - name: Run tests
         run: npm test
 

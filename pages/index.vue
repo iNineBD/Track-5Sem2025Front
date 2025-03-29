@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useProjects } from '~/composables/useProjects'
+import { useProjects } from "~/composables/useProjects";
 
 useHead({
-  title: 'Home - Track',
-})
+  title: "Home - Track",
+});
 
-const { data: projects, pending: loadingProjects, error } = useProjects()
-const toast = useToast()
+const { data: projects, pending: loadingProjects, error } = useProjects();
+const toast = useToast();
 
 if (error.value) {
   toast.add({
@@ -15,7 +15,7 @@ if (error.value) {
     title: "Error",
     description: "Falha ao carregar projetos. Tente novamente mais tarde.",
     timeout: 0,
-  })
+  });
 }
 </script>
 
@@ -31,8 +31,8 @@ if (error.value) {
           :ui="{ rounded: 'rounded-lg' }"
         />
         <ProjectCard
-          v-for="project in projects"
           v-else
+          v-for="project in projects"
           :key="project.id"
           :project="project"
           @click="navigateTo('/project/' + project.id)"

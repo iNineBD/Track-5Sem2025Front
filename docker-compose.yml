@@ -43,6 +43,6 @@ volumes:
   postgresql:
   postgresql_data:
 
-networks:
-  qtsw-network:
-    driver: bridge
+networks: 
+    qtsw-network:
+        driver: bridge

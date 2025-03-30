@@ -3,7 +3,7 @@ definePageMeta({
   layout: 'login'
 })
 useHead({
-  title: 'Login | Track'
+  title: 'Login - Track'
 })
 </script>
 <template>

@@ -1,0 +1,32 @@
+name: Workflow
+
+on:
+  push:
+    branches: [main, sprint-1, sprint-2, sprint-3]
+  pull_request:
+    branches: [main, sprint-1, sprint-2, sprint-3]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x] # Versão LTS do Node recomendada para Nuxt 3
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install --no-package-lock
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build application
+        run: npm run build

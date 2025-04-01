@@ -12,7 +12,7 @@ const props = defineProps<{
     class="w-full hover:scale-[1.02] hover:border border-gray-200 dark:border-gray-700 duration-300 ease-in cursor-pointer"
   >
     <template #header>
-      <div class="flex flex-row items-center space-x-4">
+      <div class="flex flex-row items-center space-x-4 overflow-hidden break-all">
         <UAvatar 
           :alt="project.name"
           size="3xl"
@@ -23,14 +23,14 @@ const props = defineProps<{
             size="extra-large"
             color="primary"
             weight="semi-bold"
-            class="mb-0 line-clamp-1 text-ellipsis"
+            class="mb-0 line-clamp-1"
           >
-            {{ project.name }}
+          {{ project.name }}
           </UText>
           <UText
             size="small"
             weight="normal"
-            class="line-clamp-2"
+            class="line-clamp-3"
           >
             {{ project.description }}
           </UText>

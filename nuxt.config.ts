@@ -17,9 +17,6 @@ export default defineNuxtConfig({
         usePolling: true,
       },
     },
-    optimizeDeps: {
-      include: ["some-package"],
-    },
   },
   components: [
     {

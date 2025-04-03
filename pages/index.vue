@@ -8,15 +8,25 @@ useHead({
 const { data: projects, pending: loadingProjects, error } = useProjects();
 const toast = useToast();
 
-if (error.value) {
-  toast.add({
-    icon: "i-heroicons-x-circle",
-    color: "red",
-    title: "Error",
-    description: "Falha ao carregar projetos. Tente novamente mais tarde.",
-    timeout: 0,
-  });
-}
+const actions = ref([
+  {
+    label: "Recarregar",
+    click: () => window.location.reload(),
+  },
+]);
+
+watchEffect(() => {
+  if (error.value) {
+    toast.add({
+      icon: "i-heroicons-x-circle",
+      color: "red",
+      title: "Erro",
+      description: "Falha ao carregar estatísticas. Tente novamente.",
+      timeout: 0,
+      actions: actions.value,
+    });
+  }
+});
 
 const page = ref(1);
 const itemsPerPage = 4;
@@ -25,7 +35,7 @@ const searchQuery = ref("");
 const filteredProjects = computed(() => {
   if (!projects.value) return [];
   return projects.value.filter((project: { name: string }) =>
-    project.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    project.name.toLowerCase().includes(searchQuery.value.toLowerCase()),
   );
 });
 
@@ -82,39 +92,37 @@ const selected = ref("nome");
 
 <template>
   <div>
-    <div class="flex flex-row items-center justify-between mb-4">
-      <div class="flex flex-row gap-4 items-center">
-        <UText tag="h1" size="title" weight="bold"> Meus Projetos </UText>
-        <div>
-          <UInput
-            v-model="searchQuery"
-            icon="i-heroicons-magnifying-glass-20-solid"
-            size="sm"
-            color="white"
-            :trailing="false"
-            placeholder="Search..."
-          />
-        </div>
-      </div>
-      <UPopover>
-        <UButton
-          icon="heroicons:bars-arrow-up"
-          size="sm"
-          color="primary"
-          variant="soft"
-          label="Ordenar"
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+      <UText tag="h1" size="title" weight="bold"> Meus Projetos </UText>
+      <div class="flex flex-row items-center gap-4">
+        <UInput
+          v-model="searchQuery"
+          icon="i-heroicons-magnifying-glass-20-solid"
+          size="md"
+          color="white"
           :trailing="false"
+          placeholder="Search..."
         />
-        <template #panel>
-          <div class="p-4">
-            <URadioGroup
-              v-model="selected"
-              legend="Ordenar os projetos"
-              :options="options"
-            />
-          </div>
-        </template>
-      </UPopover>
+        <UPopover>
+          <UButton
+            icon="heroicons:bars-arrow-up"
+            size="md"
+            color="primary"
+            variant="soft"
+            label="Ordenar"
+            :trailing="false"
+          />
+          <template #panel>
+            <div class="p-4">
+              <URadioGroup
+                v-model="selected"
+                legend="Ordenar os projetos"
+                :options="options"
+              />
+            </div>
+          </template>
+        </UPopover>
+      </div>
     </div>
     <div>
       <div
@@ -127,7 +135,7 @@ const selected = ref("nome");
       </div>
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <USkeleton
-          v-if="loadingProjects || error"
+          v-if="loadingProjects"
           v-for="n in itemsPerPage"
           :key="n"
           class="w-full h-80"

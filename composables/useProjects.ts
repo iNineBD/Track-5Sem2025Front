@@ -7,7 +7,7 @@ export function useProjects() {
   const { data, pending, error } = useAsyncData("fetchProjects", async () => {
     try {
       const response = await $api.get(
-        `${config.public.apiServer}/projects/data`
+        `${config.public.apiServer}/projects/data`,
       );
       return { projects: response.data.success };
     } catch (error) {

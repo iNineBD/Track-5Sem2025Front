@@ -9,7 +9,7 @@ export function useProjectStatistics(projectId: string | number) {
     async () => {
       try {
         const response = await $api.get(
-          `${config.public.apiServer}/statistics/data/${projectId}`
+          `${config.public.apiServer}/statistics/data/${projectId}`,
         );
         return { projectStatistics: response.data.success };
       } catch (error) {
@@ -19,7 +19,7 @@ export function useProjectStatistics(projectId: string | number) {
           error: error instanceof Error ? error.message : "Erro desconhecido",
         };
       }
-    }
+    },
   );
 
   return {

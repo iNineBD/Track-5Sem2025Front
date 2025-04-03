@@ -35,7 +35,7 @@ const props = withDefaults(
     size: "medium",
     weight: "normal",
     color: "inherit",
-  }
+  },
 );
 
 const attrs = useAttrs();

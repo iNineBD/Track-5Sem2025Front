@@ -4,7 +4,7 @@ export function useProjects() {
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 
-  const { data, pending, error } = useAsyncData("fetchProjects", async () => {
+  const { data, pending } = useAsyncData("fetchProjects", async () => {
     try {
       const response = await $api.get(
         `${config.public.apiServer}/projects/data`,

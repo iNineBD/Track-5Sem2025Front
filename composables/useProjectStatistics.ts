@@ -4,7 +4,7 @@ export function useProjectStatistics(projectId: string | number) {
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 
-  const { data, pending, error } = useAsyncData(
+  const { data, pending } = useAsyncData(
     `fetchProjectStatistics-${projectId}`,
     async () => {
       try {

@@ -29,7 +29,7 @@ const actions = ref([
 ]);
 
 watchEffect(() => {
-  if (error.value) {
+  if (error && error.value) {
     toast.add({
       icon: "i-heroicons-x-circle",
       color: "red",

@@ -16,12 +16,12 @@ const actions = ref([
 ]);
 
 watchEffect(() => {
-  if (error.value) {
+  if (error && error.value) {
     toast.add({
       icon: "i-heroicons-x-circle",
       color: "red",
       title: "Erro",
-      description: "Falha ao carregar estatísticas. Tente novamente.",
+      description: "Falha ao carregar projetos. Tente novamente.",
       timeout: 0,
       actions: actions.value,
     });
@@ -129,25 +129,30 @@ const selected = ref("nome");
         v-if="!loadingProjects && filteredProjects.length === 0"
         class="flex flex-row items-center justify-center h-80"
       >
-        <UText tag="h1" size="large" weight="normal" color="gray"
-          >Nenhum projeto encontrado</UText
-        >
+        <UText tag="h1" size="large" weight="normal" color="gray">
+          Nenhum projeto encontrado
+        </UText>
       </div>
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <USkeleton
-          v-if="loadingProjects"
-          v-for="n in itemsPerPage"
-          :key="n"
-          class="w-full h-80"
-          :ui="{ rounded: 'rounded-lg' }"
-        />
-        <ProjectCard
+      <div v-else>
+        <div v-if="loadingProjects">
+          <USkeleton
+            v-for="n in itemsPerPage"
+            :key="n"
+            class="w-full h-80"
+            :ui="{ rounded: 'rounded-lg' }"
+          />
+        </div>
+        <div
           v-else
-          v-for="project in paginatedProjects"
-          :key="project.id"
-          :project="project"
-          @click="navigateTo('/project/' + project.id)"
-        />
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+          <ProjectCard
+            v-for="project in paginatedProjects"
+            :key="project.id"
+            :project="project"
+            @click="navigateTo('/project/' + project.id)"
+          />
+        </div>
       </div>
     </div>
     <div

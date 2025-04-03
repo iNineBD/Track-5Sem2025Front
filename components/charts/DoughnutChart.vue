@@ -37,9 +37,15 @@ const chartConfig = useDoughnut(props.labels, props.data);
       </div>
     </template>
     <template #footer>
-      <UText tag="h1" size="medium" weight="normal" class="mt-0 mb-0"
-        >Total: {{ total }} cards</UText
+      <UText
+        v-if="!noData"
+        tag="h1"
+        size="medium"
+        weight="normal"
+        class="mt-0 mb-0"
       >
+        Total: {{ total }} cards
+      </UText>
     </template>
   </UCard>
 </template>

@@ -1,22 +1,22 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import BarChart from "~/components/charts/BarChart.vue";
+import DoughnutChart from "~/components/charts/DoughnutChart.vue";
 
-describe("BarChart", () => {
+describe("DoughnutChart", () => {
   it("renders chart title and total cards", () => {
     const props = {
-      labels: ["User A", "User B", "User C"],
-      data: [10, 20, 30],
-      total: 60,
-      title: "Cards por usuários",
+      labels: ["Tag A", "Tag B", "Tag C"],
+      data: [15, 25, 35],
+      total: 75,
+      title: "Cards por tags",
     };
 
-    const wrapper = mount(BarChart, {
+    const wrapper = mount(DoughnutChart, {
       props,
     });
 
-    expect(wrapper.text()).toContain("Cards por usuários");
-    expect(wrapper.text()).toContain("Total: 60 cards");
+    expect(wrapper.text()).toContain("Cards por tags");
+    expect(wrapper.text()).toContain("Total: 75 cards");
   });
 
   it("displays 'No data' when noData prop is true", () => {
@@ -25,10 +25,10 @@ describe("BarChart", () => {
       data: [],
       noData: true,
       total: 0,
-      title: "Cards por usuários",
+      title: "Cards por tags",
     };
 
-    const wrapper = mount(BarChart, {
+    const wrapper = mount(DoughnutChart, {
       props,
     });
 

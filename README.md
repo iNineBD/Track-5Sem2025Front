@@ -1,14 +1,18 @@
 # Track-5Sem2025Front
+
 Repository intended for the implementation of an academic project in partnership with a real company.
 
 ## About the Project
+
 This front-end project is being developed using Nuxt 3, a modern framework based on Vue.js. It provides an efficient and modular interface for managing project data. The application integrates Tailwind CSS for styling and offers a seamless user experience.
 
 ## Prerequisites
+
 - Node.js
 - npm (Node Package Manager)
 
 ## Cloning the Repository
+
 Clone this repository using the following commands:
 
 ```bash
@@ -17,6 +21,7 @@ cd Track-5Sem2025Front
 ```
 
 ## Setting Up Environment Variables
+
 Before running the project, create a `.env` file in the root directory. Use the `.env.example` file as a template:
 
 ```bash
@@ -30,6 +35,7 @@ API_SERVER=url_api_server
 ```
 
 ## Installing Dependencies
+
 Install the project dependencies with the command:
 
 ```bash
@@ -37,6 +43,7 @@ npm install
 ```
 
 ## Running the Project
+
 To run the project, execute the following command:
 
 ```bash
@@ -44,4 +51,5 @@ npm run dev
 ```
 
 ## Accessing the Project
+
 Access the project at [http://localhost:3000/](http://localhost:3000/).

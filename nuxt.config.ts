@@ -2,11 +2,16 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxt/image", "nuxt-echarts", '@nuxt/test-utils/module'],
+  modules: [
+    "@nuxt/ui",
+    "@nuxt/image",
+    "@nuxt/test-utils/module",
+    "@nuxt/eslint",
+  ],
   runtimeConfig: {
     public: {
-      apiServer: process.env.API_SERVER
-    }
+      apiServer: process.env.API_SERVER,
+    },
   },
   colorMode: {
     preference: "light",
@@ -16,9 +21,6 @@ export default defineNuxtConfig({
       watch: {
         usePolling: true,
       },
-    },
-    optimizeDeps: {
-      include: ["some-package"],
     },
   },
   components: [

@@ -7,14 +7,14 @@ export const formatDate = (
     day: "numeric" as const,
     month: "long" as const,
     year: "numeric" as const,
-  }
+  },
 ) => {
   return new Date(date).toLocaleDateString(locale, options);
 };
 
 export const differenceBetweenDays = (
   createdDate: string,
-  finishDate: string | null
+  finishDate: string | null,
 ) => {
   const startDate = new Date(createdDate);
   const endDate = finishDate ? new Date(finishDate) : new Date();

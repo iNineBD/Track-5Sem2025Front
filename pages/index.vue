@@ -134,7 +134,10 @@ const selected = ref("nome");
         </UText>
       </div>
       <div v-else>
-        <div v-if="loadingProjects">
+        <div
+          v-if="loadingProjects"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
           <USkeleton
             v-for="n in itemsPerPage"
             :key="n"

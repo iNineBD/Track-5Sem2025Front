@@ -1,0 +1,52 @@
+<script setup lang="ts">
+import {
+  Chart as ChartJS,
+  BarElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+import { Bar } from "vue-chartjs";
+import { useBar } from "~/utils/chartConfig";
+
+ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
+
+const props = defineProps<{
+  labels: string[];
+  data: number[];
+  noData?: boolean;
+  total: number;
+  title?: string;
+}>();
+
+const chartConfig = useBar(props.labels, props.data);
+</script>
+
+<template>
+  <UCard class="border-gray-200 dark:border-gray-700">
+    <template #header>
+      <UText tag="h1" size="large" weight="medium" class="mt-0 mb-0">{{
+        title
+      }}</UText>
+    </template>
+    <template #default>
+      <div class="flex items-center justify-center h-64">
+        <UText v-if="noData" tag="h1" size="large" weight="normal" color="gray"
+          >No data</UText
+        >
+        <Bar
+          v-else
+          :data="chartConfig.data"
+          :options="chartConfig.options"
+          class="max-h-80"
+        />
+      </div>
+    </template>
+    <template v-if="!noData" #footer>
+      <UText tag="h1" size="medium" weight="normal" class="mt-0 mb-0">
+        Total: {{ total }} cards
+      </UText>
+    </template>
+  </UCard>
+</template>

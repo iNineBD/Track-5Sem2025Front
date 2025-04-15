@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/test-utils/module",
     "@nuxt/eslint",
+    "nuxt-auth-utils",
   ],
   runtimeConfig: {
     public: {

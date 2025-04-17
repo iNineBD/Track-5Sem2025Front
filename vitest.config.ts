@@ -11,5 +11,9 @@ export default defineVitestConfig({
         },
       },
     },
+    coverage: {
+      reporter: ["text", "lcov"],
+      reportsDirectory: "./coverage",
+    },
   },
 });

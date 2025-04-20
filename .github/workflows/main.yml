@@ -43,7 +43,8 @@ jobs:
             -Dsonar.organization=ininetrack
             -Dsonar.sources=.
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.branch.name=${{ github.head_ref }}  # A branch que está sendo analisada no PR
             -Dsonar.verbose=true
+#            -Dsonar.branch.name=${{ github.head_ref }}  # A branch que está sendo analisada no PR
+            
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

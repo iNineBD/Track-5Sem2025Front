@@ -43,7 +43,6 @@ npm install
 ```
 
 ## Running the Project
-
 To run the project, execute the following command:
 
 ```bash
@@ -51,5 +50,4 @@ npm run dev
 ```
 
 ## Accessing the Project
-
 Access the project at [http://localhost:3000/](http://localhost:3000/).

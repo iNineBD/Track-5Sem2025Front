@@ -1,4 +1,4 @@
-name: Lint
+name: Lint+Prettier
 
 on:
   push:
@@ -26,3 +26,6 @@ jobs:
 
       - name: Run ESLint with auto fix
         run: npm run lint:fix
+
+      - name: Build application
+        run: npm run build

@@ -34,7 +34,7 @@ jobs:
         run: npm run build
 
       - name: Upload coverage to SonarCloud
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v5
         with:
           args: >
             -Dsonar.projectKey=iNineBD_Track-5Sem2025Front

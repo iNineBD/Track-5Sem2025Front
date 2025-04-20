@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Isso garante que o clone seja completo e com o histórico completo de commits
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -33,7 +35,7 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Upload coverage to SonarCloud
+      - name: SonarQube Scan and Upload
         uses: SonarSource/sonarqube-scan-action@v5
         with:
           args: >

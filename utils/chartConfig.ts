@@ -1,13 +1,9 @@
 import type { ChartConfiguration, ChartData } from "chart.js";
-import { useColorMode } from "#imports";
 
 export function useDoughnut(
   labels: string[],
   data: number[],
 ): ChartConfiguration<"doughnut"> {
-  const colorMode = useColorMode();
-  const isDark = colorMode.value === "dark";
-
   return {
     type: "doughnut",
     data: {
@@ -16,41 +12,20 @@ export function useDoughnut(
         {
           label: "Quantidade",
           data,
-          backgroundColor: isDark
-            ? [
-                "rgba(200, 99, 132, 0.7)",
-                "rgba(54, 162, 235, 0.7)",
-                "rgba(255, 206, 86, 0.7)",
-                "rgba(75, 192, 192, 0.7)",
-                "rgba(153, 102, 255, 0.7)",
-                "rgba(255, 159, 64, 0.7)",
-              ]
-            : [
-                "rgba(255, 99, 132, 0.5)",
-                "rgba(54, 162, 235, 0.5)",
-                "rgba(255, 206, 86, 0.5)",
-                "rgba(75, 192, 192, 0.5)",
-                "rgba(153, 102, 255, 0.5)",
-                "rgba(255, 159, 64, 0.5)",
-              ],
-          borderColor: isDark
-            ? [
-                "rgba(200, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-                "rgba(153, 102, 255, 1)",
-                "rgba(255, 159, 64, 1)",
-              ]
-            : [
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-                "rgba(153, 102, 255, 1)",
-                "rgba(255, 159, 64, 1)",
-              ],
-          borderWidth: 1,
+          backgroundColor: [
+            "#B3A4E1",
+            "#9985D7",
+            "#7F66CD",
+            "#6648C3",
+            "#4E30B0",
+            "#3D248F",
+            "#2F1682",
+            "#261263",
+            "#1A0D46",
+            "#140832",
+            "#0E051F",
+          ],
+          borderWidth: 0,
         },
       ],
     } as ChartData<"doughnut", number[], unknown>,
@@ -60,13 +35,10 @@ export function useDoughnut(
   };
 }
 
-export function useBar(
+export function useHorizontalBar(
   labels: string[],
   data: number[],
 ): ChartConfiguration<"bar"> {
-  const colorMode = useColorMode();
-  const isDark = colorMode.value === "dark";
-
   return {
     type: "bar",
     data: {
@@ -75,13 +47,65 @@ export function useBar(
         {
           label: "Quantidade",
           data,
-          backgroundColor: isDark
-            ? "rgba(54, 162, 235, 0.7)"
-            : "rgba(54, 162, 235, 0.5)",
-          borderColor: isDark
-            ? "rgba(54, 162, 235, 1)"
-            : "rgba(54, 162, 235, 1)",
-          borderWidth: 1,
+          backgroundColor: [
+            "#B3A4E1",
+            "#9985D7",
+            "#7F66CD",
+            "#6648C3",
+            "#4E30B0",
+            "#3D248F",
+            "#2F1682",
+            "#261263",
+            "#1A0D46",
+            "#140832",
+            "#0E051F",
+          ],
+          borderWidth: 0,
+        },
+      ],
+    } as ChartData<"bar", number[], unknown>,
+    options: {
+      responsive: true,
+      indexAxis: "y",
+      scales: {
+        y: { beginAtZero: true },
+        x: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1,
+          },
+        },
+      },
+    },
+  };
+}
+
+export function useVerticalBar(
+  labels: string[],
+  data: number[],
+): ChartConfiguration<"bar"> {
+  return {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Quantidade",
+          data,
+          backgroundColor: [
+            "#B3A4E1",
+            "#9985D7",
+            "#7F66CD",
+            "#6648C3",
+            "#4E30B0",
+            "#3D248F",
+            "#2F1682",
+            "#261263",
+            "#1A0D46",
+            "#140832",
+            "#0E051F",
+          ],
+          borderWidth: 0,
         },
       ],
     } as ChartData<"bar", number[], unknown>,
@@ -89,7 +113,12 @@ export function useBar(
       responsive: true,
       scales: {
         x: { beginAtZero: true },
-        y: { beginAtZero: true },
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1,
+          },
+        },
       },
     },
   };

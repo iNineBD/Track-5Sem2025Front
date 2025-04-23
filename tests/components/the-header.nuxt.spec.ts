@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import TheHeader from "~/components/the-header/index.vue";
+import TheHeader from "~/components/the-header.vue";
 
 describe("TheHeader", () => {
   it("renders the header with logo and navigation", () => {

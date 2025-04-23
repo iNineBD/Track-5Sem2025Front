@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import BarChart from "~/components/charts/BarChart.vue";
+import BarChart from "~/components/charts/VerticalBarChart.vue";
 
 describe("BarChart", () => {
   it("renders chart title and total cards", () => {

@@ -65,7 +65,7 @@ if (error.value) {
 
 <template>
   <div class="flex flex-col gap-6">
-    <!-- Carregando projetos -->
+    <!-- Skeleton Filtros Desktop -->
     <div v-if="loadingProjects" class="hidden lg:grid grid-cols-4 gap-4">
       <div v-for="n in 4" :key="n" class="grid grid-col gap-2">
         <USkeleton class="h-4 w-36" />
@@ -73,7 +73,7 @@ if (error.value) {
       </div>
     </div>
 
-    <!-- Filtros -->
+    <!-- Filtros Desktop-->
     <div v-else class="hidden lg:flex">
       <filters
         v-model:date-range="selectedDateRange"
@@ -82,10 +82,12 @@ if (error.value) {
       />
     </div>
 
-    <!-- Mobile -->
+    <!-- Skeleton Filtros Mobile -->
     <div v-if="loadingProjects" class="lg:hidden">
       <USkeleton class="h-12 w-full" />
     </div>
+
+    <!--Filtros Mobile -->
     <div v-else class="lg:hidden">
       <UButton
         size="lg"
@@ -133,17 +135,39 @@ if (error.value) {
     </div>
 
     <!-- Gráficos -->
-    <UText
-      v-if="!statistics"
-      size="large"
-      weight="normal"
-      color="gray"
-      align="center"
-    >
-      No data
-    </UText>
+    <div v-if="!selectedProject?.id && !statistics">
+      <UText size="large" weight="normal" color="gray" align="center">
+        Nenhum projeto selecionado
+      </UText>
+    </div>
+
+    <!-- Skeleton Gráficos -->
+    <div v-if="selectedProject?.id && !statistics" class="flex flex-col gap-4">
+      <USkeleton class="h-16 w-1/2 md:w-96" />
+      <div
+        class="grid grid-flow-row-dense grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-4"
+      >
+        <div class="col-span-3 lg:col-span-1 flex flex-col gap-4">
+          <USkeleton class="h-96 w-full" />
+        </div>
+        <div class="col-span-3 lg:col-span-1 flex flex-col gap-4">
+          <USkeleton class="h-96 w-full" />
+        </div>
+        <div class="col-span-3 lg:col-span-1 flex flex-col gap-4">
+          <USkeleton class="h-96 w-full" />
+        </div>
+        <div class="col-span-3 lg:col-span-2 flex flex-col gap-4">
+          <USkeleton class="h-96 w-full" />
+        </div>
+        <div class="col-span-3 lg:col-span-1 flex flex-col gap-4">
+          <USkeleton class="h-96 w-full" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráficos -->
     <div
-      v-else
+      v-if="statistics"
       class="grid grid-flow-row-dense grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-4"
     >
       <div class="col-span-3 lg:col-span-1 flex flex-col gap-4">
@@ -151,7 +175,7 @@ if (error.value) {
           <CardStatistic
             icon-name="heroicons:clipboard-document-check"
             icon-color="bg-zinc-500 dark:bg-zinc-400"
-            icon-bg-color="bg-zinc-100 dark:bg-zinc-950"
+            icon-bg-color="bg-zinc-100 dark:bg-zinc-800"
             :value="
               statistics.finished_cards?.reduce(
                 (total, card) => total + card.qtd_cards_finished,
@@ -162,8 +186,8 @@ if (error.value) {
           />
           <CardStatistic
             icon-name="heroicons:check-circle"
-            icon-color="bg-green-600 dark:bg-green-700"
-            icon-bg-color="bg-green-300 dark:bg-green-950"
+            icon-color="bg-green-500 dark:bg-green-700"
+            icon-bg-color="bg-green-200 dark:bg-green-950"
             :value="
               statistics.finished_cards?.reduce(
                 (total, card) => total + card.qtd_cards_finished,

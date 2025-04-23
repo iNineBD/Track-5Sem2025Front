@@ -1,24 +1,51 @@
 export interface Project {
-  id: number;
-  name: string;
+  id_project: number;
+  name_project: string;
   description: string;
-  created_date: string;
-  modified_date: string;
-  logo_big_url: string;
-  logo_small_url: string;
+  avatar?: string;
 }
 
-export interface CardTag {
-  tag_name: string;
-  qtd: number;
+export interface ProjectOption {
+  id: number | null;
+  label: string;
+  description: string;
 }
 
-export interface CardStatus {
+export interface CardStatusItem {
   status: string;
   qtd: number;
 }
 
-export interface CardUser {
+export interface CardTagItem {
+  tag_name: string;
+  qtd: number;
+}
+
+export interface CardUserItem {
   name_user: string;
   qtd: number;
+}
+
+export interface ReworksCard {
+  card_name: string;
+  qtd_rework: number;
+}
+
+export interface FinishedCard {
+  name_project: string;
+  qtd_cards_finished: number;
+}
+
+export interface ExecutionCard {
+  name_card: string;
+  time_execution: string;
+}
+
+export interface ProjectStatistics {
+  card_status: CardStatusItem[];
+  card_tag?: CardTagItem[];
+  card_user?: CardUserItem[];
+  reworks_cards?: ReworksCard[];
+  finished_cards?: FinishedCard[];
+  execution_cards?: ExecutionCard[];
 }

@@ -31,6 +31,11 @@ export interface ReworksCard {
   qtd_rework: number;
 }
 
+export interface StartedCards {
+  name_project: string;
+  qtd_cards_started: number;
+}
+
 export interface FinishedCard {
   name_project: string;
   qtd_cards_finished: number;
@@ -46,6 +51,7 @@ export interface ProjectStatistics {
   card_tag?: CardTagItem[];
   card_user?: CardUserItem[];
   reworks_cards?: ReworksCard[];
+  started_cards?: StartedCards[];
   finished_cards?: FinishedCard[];
   execution_cards?: ExecutionCard[];
 }

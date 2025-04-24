@@ -177,8 +177,8 @@ if (error.value) {
             icon-color="bg-zinc-500 dark:bg-zinc-400"
             icon-bg-color="bg-zinc-100 dark:bg-zinc-800"
             :value="
-              statistics.finished_cards?.reduce(
-                (total, card) => total + card.qtd_cards_finished,
+              statistics.started_cards?.reduce(
+                (total, card) => total + card.qtd_cards_started,
                 0,
               ) || 0
             "

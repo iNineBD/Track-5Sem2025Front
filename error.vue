@@ -7,6 +7,9 @@ const props = defineProps({
     default: () => ({}),
   },
 });
+const reloadPage = () => {
+  window.location.reload();
+};
 </script>
 
 <template>
@@ -23,8 +26,8 @@ const props = defineProps({
     >
       {{ props.error.message }}
     </UText>
-    <UButton to="/" color="primary" variant="solid" size="lg" class="font-bold">
-      Home
+    <UButton color="primary" size="lg" class="font-bold" @click="reloadPage">
+      Reload
     </UButton>
   </div>
 </template>

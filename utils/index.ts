@@ -5,7 +5,7 @@ export const formatDate = (
   locale = "pt-BR",
   options = {
     day: "numeric" as const,
-    month: "long" as const,
+    month: "numeric" as const,
     year: "numeric" as const,
   },
 ) => {

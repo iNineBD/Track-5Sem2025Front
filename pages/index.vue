@@ -3,7 +3,7 @@ import { useProjects } from "~/composables/useProjects";
 import { useProjectStatistics } from "~/composables/useProjectStatistics";
 import { sub, format } from "date-fns";
 import type { ProjectOption, ProjectStatistics } from "~/types";
-import CardStatistic from "~/components/charts/CardStatistic.vue";
+import CardStatistic from "~/components/charts/card-statistic.vue";
 
 useHead({
   title: "Home - Track",
@@ -198,10 +198,11 @@ if (error.value) {
           />
         </div>
 
-        <VerticalBarChart
+        <BarChart
           title="Cards por tag"
           :labels="statistics.card_tag?.map((t) => t.tag_name) || []"
           :data="statistics.card_tag?.map((t) => t.qtd) || []"
+          index-axis="x"
         />
       </div>
 
@@ -226,10 +227,11 @@ if (error.value) {
       </div>
 
       <div class="col-span-3 lg:col-span-2">
-        <HorizontalBarChart
+        <BarChart
           title="Cards por usuário"
           :labels="statistics.card_user?.map((u) => u.name_user) || []"
           :data="statistics.card_user?.map((u) => u.qtd) || []"
+          index-axis="y"
         />
       </div>
 

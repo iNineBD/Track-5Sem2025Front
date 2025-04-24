@@ -8,7 +8,7 @@ import {
   LinearScale,
 } from "chart.js";
 import { Bar } from "vue-chartjs";
-import { useVerticalBar } from "~/utils/chartConfig";
+import { useHorizontalBar, useVerticalBar } from "~/utils/chartConfig";
 
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -16,9 +16,13 @@ const props = defineProps<{
   title: string;
   labels: string[];
   data: number[];
+  indexAxis: "x" | "y";
 }>();
 
-const chartConfig = useVerticalBar(props.labels, props.data);
+const chartConfig =
+  props.indexAxis === "x"
+    ? useVerticalBar(props.labels, props.data)
+    : useHorizontalBar(props.labels, props.data);
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import DoughnutChart from "~/components/charts/DoughnutChart.vue";
+import DoughnutChart from "~/components/charts/doughnut-chart.vue";
 
 describe("DoughnutChart", () => {
   it("renders chart title and total cards", () => {

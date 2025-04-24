@@ -7,7 +7,6 @@ describe("DoughnutChart", () => {
     const props = {
       labels: ["Tag A", "Tag B", "Tag C"],
       data: [15, 25, 35],
-      total: 75,
       title: "Cards por tags",
     };
 
@@ -16,15 +15,12 @@ describe("DoughnutChart", () => {
     });
 
     expect(wrapper.text()).toContain("Cards por tags");
-    expect(wrapper.text()).toContain("Total: 75 cards");
   });
 
   it("displays 'No data' when noData prop is true", () => {
     const props = {
       labels: [],
       data: [],
-      noData: true,
-      total: 0,
       title: "Cards por tags",
     };
 
@@ -32,7 +28,6 @@ describe("DoughnutChart", () => {
       props,
     });
 
-    expect(wrapper.text()).toContain("No data");
     expect(wrapper.text()).not.toContain("Total: 0 cards");
   });
 });

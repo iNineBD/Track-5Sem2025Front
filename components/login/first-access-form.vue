@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { defineEmits, reactive } from "vue";
 import type { FormError } from "#ui/types";
+
+const emit = defineEmits<{
+  (e: "change-to-create-password"): void;
+}>();
 
 const state = reactive({
   email: "",
@@ -13,9 +17,13 @@ const validate = (state: any): FormError[] => {
   return errors;
 };
 
+const handleChangeToCreatePassword = () => {
+  emit("change-to-create-password");
+};
+
 const sendToken = async () => {
+  handleChangeToCreatePassword();
   console.log("Token enviado");
-  // Your sendToken logic here
 };
 </script>
 
@@ -27,9 +35,15 @@ const sendToken = async () => {
       class="space-y-4"
       @submit="sendToken"
     >
-      <UFormGroup label="Email" name="email">
+      <UText tag="h2" size="title" weight="bold" class="mb-0 line-clamp-1">
+        Primeiro acesso
+      </UText>
+
+      <UFormGroup tag="h1" size="lg" label="Email" name="email" class="w-full">
         <UInput v-model="state.email" type="email" placeholder="Email" />
       </UFormGroup>
+
+      <UButton type="submit" class="w-full justify-center">Enviar</UButton>
     </UForm>
   </div>
 </template>

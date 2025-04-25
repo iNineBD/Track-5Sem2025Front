@@ -1,25 +1,52 @@
-import { z } from "zod";
+import { useRuntimeConfig } from "#app";
 
-const bodySchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-});
+interface LoginResponse {
+  id: number;
+  email: string;
+  role: number;
+  token: string;
+}
 
-export default defineEventHandler(async (event) => {
-  const { email, password } = await readValidatedBody(event, bodySchema.parse);
+export const useLogin = async (email: string, password: string) => {
+  const config = useRuntimeConfig();
 
-  if (email === "admin@admin.com" && password === "iamtheadmin") {
-    // set the user session in the cookie
-    // this server util is auto-imported by the auth-utils module
-    await setUserSession(event, {
-      user: {
-        name: "John Doe",
-      },
-    });
-    return {};
+  try {
+    const response = await $fetch<LoginResponse>(
+      `${config.public.apiServer}/login`,
+      {
+        method: "POST",
+        body: {
+          email,
+          password,
+        },
+      }
+    );
+
+    if (response.token) {
+      localStorage.setItem("authToken", response.token);
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({
+          id: response.id,
+          email: response.email,
+          role: response.role,
+        })
+      );
+
+      return { success: true, message: "Login bem-sucedido!" };
+    } else {
+      return {
+        success: false,
+        message: "Token JWT não encontrado na resposta do servidor.",
+      };
+    }
+  } catch (error: any) {
+    console.error("Erro ao fazer login:", error);
+    const message =
+      error?.data?.error || "Erro ao fazer login. Verifique suas credenciais.";
+    return {
+      success: false,
+      message,
+    };
   }
-  throw createError({
-    statusCode: 401,
-    message: "Bad credentials",
-  });
-});
+};

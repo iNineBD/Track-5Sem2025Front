@@ -26,7 +26,6 @@ const validate = (state: any): FormError[] => {
 
 const createPassword = async () => {
   console.log("Password created");
-  // Your password creation logic here
 };
 </script>
 
@@ -38,15 +37,31 @@ const createPassword = async () => {
       class="space-y-4"
       @submit="createPassword"
     >
-      <UFormGroup label="Token" name="token">
+      <UText tag="h2" size="title" weight="bold" class="mb-0 line-clamp-1">
+        Login
+      </UText>
+
+      <UFormGroup tag="h1" size="lg" label="Token" name="token" class="w-full">
         <UInput v-model="state.token" type="text" placeholder="Token" />
       </UFormGroup>
 
-      <UFormGroup label="Password" name="password">
+      <UFormGroup
+        tag="h1"
+        size="lg"
+        label="Senha"
+        name="password"
+        class="w-full"
+      >
         <UInput v-model="state.password" type="password" placeholder="Senha" />
       </UFormGroup>
 
-      <UFormGroup label="Confirm Password" name="confirmPassword">
+      <UFormGroup
+        tag="h1"
+        size="lg"
+        label="Confirmar Senha"
+        name="confirmPassword"
+        class="w-full"
+      >
         <UInput
           v-model="state.confirmPassword"
           type="password"
@@ -54,7 +69,7 @@ const createPassword = async () => {
         />
       </UFormGroup>
 
-      <UButton type="submit">Criar Senha</UButton>
+      <UButton type="submit" class="w-full justify-center">Criar Senha</UButton>
     </UForm>
   </div>
 </template>

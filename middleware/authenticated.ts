@@ -1,8 +1,24 @@
 export default defineNuxtRouteMiddleware(() => {
-  const { loggedIn } = useUserSession();
+  const token = useState<string | null>("authToken").value;
 
-  // redirect the user to the login screen if they're not authenticated
-  if (!loggedIn.value) {
+  if (!token) {
+    return navigateTo("/login");
+  }
+
+  const isTokenExpired = (token: string) => {
+    try {
+      const decoded = JSON.parse(atob(token.split(".")[1]));
+      const exp = decoded.exp * 1000;
+      return exp < Date.now();
+    } catch {
+      return true;
+    }
+  };
+
+  if (isTokenExpired(token)) {
+    if (import.meta.client) {
+      localStorage.removeItem("authToken");
+    }
     return navigateTo("/login");
   }
 });

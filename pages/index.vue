@@ -5,6 +5,10 @@ import { sub, format } from "date-fns";
 import type { ProjectOption, ProjectStatistics } from "~/types";
 import CardStatistic from "~/components/charts/card-statistic.vue";
 
+definePageMeta({
+  middleware: "authenticated",
+});
+
 useHead({
   title: "Home - Track",
 });
@@ -35,7 +39,7 @@ const fetchStatistics = async () => {
     const { projectStatistics } = await useProjectStatistics(
       selectedProject.value.id,
       formattedStart,
-      formattedEnd,
+      formattedEnd
     );
 
     if (projectStatistics) {
@@ -52,7 +56,7 @@ watch(
     statistics.value = null;
     fetchStatistics();
   },
-  { deep: true },
+  { deep: true }
 );
 
 if (error.value) {
@@ -179,7 +183,7 @@ if (error.value) {
             :value="
               statistics.started_cards?.reduce(
                 (total, card) => total + card.qtd_cards_started,
-                0,
+                0
               ) || 0
             "
             text="criados"
@@ -191,7 +195,7 @@ if (error.value) {
             :value="
               statistics.finished_cards?.reduce(
                 (total, card) => total + card.qtd_cards_finished,
-                0,
+                0
               ) || 0
             "
             text="finalizados"

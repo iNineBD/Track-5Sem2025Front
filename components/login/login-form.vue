@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
+import { useLogin } from "~/server/login.post";
 import type { FormError } from "#ui/types";
+
+const router = useRouter();
 
 const state = reactive({
   email: "",
   password: "",
 });
+
+const errorMessage = ref("Usuário não encontrado!");
 
 const validate = (state: any): FormError[] => {
   const errors = [];
@@ -17,8 +23,14 @@ const validate = (state: any): FormError[] => {
 };
 
 const login = async () => {
-  console.log("Usuário logado");
-  // Your login logic here
+  errorMessage.value = "";
+  const result = await useLogin(state.email, state.password);
+
+  if (result.success) {
+    router.push("/"); // redireciona para a home após login
+  } else {
+    errorMessage.value = result.message;
+  }
 };
 </script>
 
@@ -30,15 +42,29 @@ const login = async () => {
       class="space-y-4"
       @submit="login"
     >
-      <UFormGroup tag="h1" size="lg" label="Email" name="email">
+      <UText tag="h2" size="title" weight="bold" class="mb-0 line-clamp-1">
+        Login
+      </UText>
+
+      <UFormGroup tag="h1" size="lg" label="Email" name="email" class="w-full">
         <UInput v-model="state.email" type="email" placeholder="Email" />
       </UFormGroup>
 
-      <UFormGroup label="Password" name="password">
+      <UFormGroup
+        tag="h1"
+        size="lg"
+        label="Senha"
+        name="password"
+        class="w-full"
+      >
         <UInput v-model="state.password" type="password" placeholder="Senha" />
       </UFormGroup>
 
-      <UButton type="submit">Login</UButton>
+      <UButton type="submit" class="w-full justify-center">Login</UButton>
+
+      <div v-if="errorMessage" class="text-red-500 text-sm mt-2">
+        {{ errorMessage }}
+      </div>
     </UForm>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { useLogin } from "~/server/login.post";
+import { useAuthenticate } from "~/composables/useAuth";
 import type { FormError } from "#ui/types";
 
 const router = useRouter();
@@ -24,7 +24,7 @@ const validate = (state: any): FormError[] => {
 
 const login = async () => {
   errorMessage.value = "";
-  const result = await useLogin(state.email, state.password);
+  const result = await useAuthenticate(state.email, state.password);
 
   if (result.success) {
     router.push("/"); // redireciona para a home após login

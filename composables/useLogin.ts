@@ -16,8 +16,7 @@ export async function useLogin(email: string, password: string) {
     const token = response.data?.success?.token;
     if (token) {
       const tokenCookie = useCookie("token", {
-        // maxAge: 60 * 60,
-        maxAge: 60 * 2,
+        maxAge: 60 * 60,
         path: "/",
         sameSite: "strict",
         // secure: process.env.NODE_ENV === "production",

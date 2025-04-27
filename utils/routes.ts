@@ -16,6 +16,11 @@ export default function useRoutes() {
     isDark.value = !isDark.value;
   };
 
+  const logout = () => {
+    useCookie("token").value = null;
+    navigateTo("/login");
+  };
+
   const routes = computed(() => [
     [
       {
@@ -42,7 +47,7 @@ export default function useRoutes() {
       {
         label: "Logout",
         icon: "heroicons:arrow-right-start-on-rectangle-20-solid",
-        to: "/login",
+        click: logout,
       },
     ],
   ]);

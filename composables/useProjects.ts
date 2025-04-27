@@ -1,5 +1,3 @@
-import { useNuxtApp, useRuntimeConfig } from "#app";
-
 export function useProjects() {
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();

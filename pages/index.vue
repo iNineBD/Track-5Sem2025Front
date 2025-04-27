@@ -5,6 +5,10 @@ import { sub, format } from "date-fns";
 import type { ProjectOption, ProjectStatistics } from "~/types";
 import CardStatistic from "~/components/charts/card-statistic.vue";
 
+definePageMeta({
+  middleware: "auth",
+});
+
 useHead({
   title: "Home - Track",
 });

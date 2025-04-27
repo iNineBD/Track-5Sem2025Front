@@ -1,5 +1,3 @@
-import { useNuxtApp, useRuntimeConfig } from "#app";
-
 export async function useProjectStatistics(
   projectId: number | null,
   start: string,

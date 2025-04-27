@@ -1,9 +1,8 @@
 import axios from "axios";
-import { useCookie } from "#app";
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
-  const token = useCookie("auth_token");
+  const token = useCookie("token");
 
   const api = axios.create({
     baseURL: config.public.apiServer,
@@ -13,6 +12,16 @@ export default defineNuxtPlugin(() => {
       Authorization: token.value ? `Bearer ${token.value}` : "",
     },
   });
+
+  api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response && error.response.status === 401) {
+        navigateTo("/login");
+      }
+      return Promise.reject(error);
+    },
+  );
 
   return {
     provide: {

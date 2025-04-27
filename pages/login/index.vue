@@ -115,6 +115,18 @@ async function handleLogin() {
           Clique aqui
         </ULink>
       </div>
+      <div class="mt-6 flex justify-center">
+        <NuxtImg
+          src="/logo-black.svg"
+          alt="Logo"
+          class="h-6 block dark:hidden"
+        />
+        <NuxtImg
+          src="/logo-white.svg"
+          alt="Logo"
+          class="h-6 hidden dark:block"
+        />
+      </div>
     </UForm>
   </UCard>
 </template>

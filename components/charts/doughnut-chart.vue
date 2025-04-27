@@ -11,8 +11,6 @@ const props = defineProps<{
   data: number[];
 }>();
 
-console.log("props", props);
-
 const chartConfig = useDoughnut(props.labels, props.data);
 </script>
 

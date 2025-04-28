@@ -1,21 +1,25 @@
-name: Workflow
+name: Build, Test and SonarCloud
 
 on:
-  push:
-    branches: [main, sprint-1, sprint-2, sprint-3]
   pull_request:
-    branches: [main, sprint-1, sprint-2, sprint-3]
-
+    branches:
+      - 'main'
+      - 'sprint-1'
+      - 'sprint-2'
+      - 'sprint-3'
+ 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x] # Versão LTS do Node recomendada para Nuxt 3
+        node-version: [18.x] # Versão LTS recomendada para Nuxt 3
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Isso garante que o clone seja completo e com o histórico completo de commits
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -25,8 +29,22 @@ jobs:
       - name: Install dependencies
         run: npm install --no-package-lock
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests with coverage
+        run: npm run test:coverage
 
       - name: Build application
         run: npm run build
+
+      - name: SonarQube Scan and Upload
+        uses: SonarSource/sonarqube-scan-action@v5
+        with:
+          args: >
+            -Dsonar.projectKey=iNineBD_Track-5Sem2025Front
+            -Dsonar.organization=ininetrack
+            -Dsonar.sources=.
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.verbose=true
+#            -Dsonar.branch.name=${{ github.head_ref }}  # A branch que está sendo analisada no PR
+            
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

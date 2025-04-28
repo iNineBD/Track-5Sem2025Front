@@ -1,12 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2024-11-01",
+  compatibilityDate: "2025-04-27",
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxt/image", "nuxt-echarts", '@nuxt/test-utils/module'],
+  modules: [
+    "@nuxt/ui",
+    "@nuxt/image",
+    "@nuxt/test-utils/module",
+    "@nuxt/eslint",
+    "nuxt-auth-utils",
+  ],
   runtimeConfig: {
     public: {
-      apiServer: process.env.API_SERVER
-    }
+      apiServer: process.env.API_SERVER,
+    },
   },
   colorMode: {
     preference: "light",
@@ -16,9 +22,6 @@ export default defineNuxtConfig({
       watch: {
         usePolling: true,
       },
-    },
-    optimizeDeps: {
-      include: ["some-package"],
     },
   },
   components: [

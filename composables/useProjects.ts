@@ -1,25 +1,31 @@
-export function useProjects() {
+import { AxiosError } from "axios";
+
+export async function useProjects() {
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 
-  const { data, pending } = useAsyncData("fetchProjects", async () => {
-    try {
-      const response = await $api.get(
-        `${config.public.apiServer}/projects/data`,
-      );
-      return { projects: response.data.success };
-    } catch (error) {
-      console.error("Erro ao buscar projetos:", error);
-      return {
-        projects: [],
-        error: error instanceof Error ? error.message : "Erro desconhecido",
-      };
-    }
-  });
+  try {
+    const response = await $api.get(
+      `${config.public.apiServer}/api/projects/data`,
+    );
 
-  return {
-    data: computed(() => data.value?.projects || []),
-    pending,
-    error: computed(() => data.value?.error || null),
-  };
+    return response.data;
+  } catch (error) {
+    let errorMessage;
+
+    if (error instanceof AxiosError && error.response) {
+      if (error.response.data && error.response.data.error) {
+        errorMessage = error.response.data.error;
+      }
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    console.error("Erro ao definir senha:", errorMessage);
+
+    return {
+      success: false,
+      message: errorMessage,
+    };
+  }
 }

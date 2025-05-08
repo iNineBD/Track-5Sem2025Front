@@ -42,7 +42,7 @@ async function handleFirstAccess() {
     toast.add({
       icon: "i-heroicons-x-circle",
       color: "green",
-      title: "Success",
+      title: "Sucesso",
       description: "Email enviado com sucesso. Verifique sua caixa de entrada.",
       timeout: 6000,
     });
@@ -50,7 +50,7 @@ async function handleFirstAccess() {
     toast.add({
       icon: "i-heroicons-x-circle",
       color: "red",
-      title: "Error",
+      title: "Erro",
       description:
         response.message ||
         "Erro ao enviar o email. Tente novamente mais tarde.",

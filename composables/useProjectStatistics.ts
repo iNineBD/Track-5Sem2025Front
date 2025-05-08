@@ -16,7 +16,7 @@ export async function useProjectStatistics(
     queryParams.append("data2", end);
 
     const response = await $api.get(
-      `${config.public.apiServer}/statistics/data/${projectId}?${queryParams.toString()}`,
+      `${config.public.apiServer}/api/statistics/data/${projectId}?${queryParams.toString()}`,
     );
     return { projectStatistics: response.data.success };
   } catch (error) {

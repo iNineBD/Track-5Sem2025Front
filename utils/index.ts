@@ -1,5 +1,3 @@
-import type { CardTag } from "~/types";
-
 export const formatDate = (
   date: string | Date,
   locale = "pt-BR",
@@ -28,7 +26,10 @@ export const daysAgo = (modifiedDate: string) => {
   const diffTime = Math.abs(now.getTime() - modified.getTime());
   return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 };
-
-export function calculateTotal(cardTag: CardTag[]): number {
-  return cardTag.reduce((sum, tag) => sum + tag.qtd, 0);
-}
+export const capitalizeName = (name: string) => {
+  if (!name) return "";
+  const parts = name.trim().split(" ").slice(0, 2);
+  return parts
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(" ");
+};

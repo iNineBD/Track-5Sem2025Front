@@ -1,9 +1,10 @@
 import { ref, computed, onMounted } from "vue";
 import { useColorMode } from "#imports";
+import { useUserStore } from "~/stores/userStore";
 
 export default function useRoutes() {
   const colorMode = useColorMode();
-
+  const userStore = useUserStore();
   const isDark = ref(false);
 
   onMounted(() => {
@@ -28,6 +29,11 @@ export default function useRoutes() {
         icon: "i-heroicons-home",
         to: "/",
       },
+      {
+        label: userStore.nameRole === "ADMIN" ? "Usuários" : "",
+        icon: userStore.nameRole === "ADMIN" ? "i-heroicons-users" : "",
+        to: "/usuarios",
+      },
     ],
     [
       {
@@ -38,9 +44,9 @@ export default function useRoutes() {
         click: toggleTheme,
       },
       {
-        label: "Profile",
+        label: capitalizeName(userStore.name),
         avatar: {
-          alt: "Lucas Henrique",
+          alt: userStore.name,
         },
         to: "#",
       },

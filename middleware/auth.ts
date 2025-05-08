@@ -1,8 +1,14 @@
-export default defineNuxtRouteMiddleware(() => {
+export default defineNuxtRouteMiddleware((to) => {
   const token = useCookie("token");
 
-  if (!token.value || isTokenExpired(token.value)) {
+  const isLoggedIn = !!token.value && !isTokenExpired(token.value);
+
+  if (!isLoggedIn && to.path !== "/login") {
     return navigateTo("/login");
+  }
+
+  if (isLoggedIn && to.path === "/login") {
+    return navigateTo("/");
   }
 });
 

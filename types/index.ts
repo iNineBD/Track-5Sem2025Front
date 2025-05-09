@@ -55,3 +55,10 @@ export interface ProjectStatistics {
   finished_cards?: FinishedCard[];
   execution_cards?: ExecutionCard[];
 }
+
+export interface Users {
+  id_user: number;
+  name_user: string;
+  id_role: number;
+  name_role: string;
+}

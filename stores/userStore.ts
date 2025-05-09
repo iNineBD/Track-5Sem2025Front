@@ -7,7 +7,6 @@ export const useUserStore = defineStore("user", {
     token: "",
     idUser: "",
     nameRole: "",
-    loggedIn: false,
   }),
 
   actions: {
@@ -23,7 +22,6 @@ export const useUserStore = defineStore("user", {
       this.token = userData.token;
       this.idUser = userData.idUser;
       this.nameRole = userData.nameRole;
-      this.loggedIn = true;
     },
 
     logout() {
@@ -32,7 +30,6 @@ export const useUserStore = defineStore("user", {
       this.token = "";
       this.idUser = "";
       this.nameRole = "";
-      this.loggedIn = false;
     },
   },
 

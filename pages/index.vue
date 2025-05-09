@@ -29,7 +29,7 @@ const selectedDateRange = ref({
   end: new Date(),
 });
 
-async function handleSetProjects() {
+async function fetchProjects() {
   loadingProjects.value = true;
 
   const response = await useProjects();
@@ -89,7 +89,7 @@ watch(
 );
 
 onMounted(async () => {
-  handleSetProjects();
+  fetchProjects();
 });
 </script>
 

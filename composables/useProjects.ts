@@ -21,7 +21,7 @@ export async function useProjects() {
       errorMessage = error.message;
     }
 
-    console.error("Erro ao definir senha:", errorMessage);
+    console.error("Erro ao buscar projetos:", errorMessage);
 
     return {
       success: false,

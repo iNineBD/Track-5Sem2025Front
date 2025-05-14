@@ -1,12 +1,22 @@
 import { AxiosError } from "axios";
 
-export async function useProjects() {
+export async function useUpdateRole({
+  id_role,
+  id_user,
+}: {
+  id_role: number;
+  id_user: number;
+}) {
+  // Debug log to verify correct parameter values
+  console.log("Updating user role", { id_role, id_user });
+
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 
   try {
-    const response = await $api.get(
-      `${config.public.apiServer}/api/projects/data`,
+    const response = await $api.put(
+      `${config.public.apiServer}/api/usermanagement/update`,
+      { id_role, id_user },
     );
 
     return response.data;
@@ -21,7 +31,7 @@ export async function useProjects() {
       errorMessage = error.message;
     }
 
-    console.error("Erro ao buscar projetos:", errorMessage);
+    console.error("Erro ao atualizar role:", errorMessage);
 
     return {
       success: false,

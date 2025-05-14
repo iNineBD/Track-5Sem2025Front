@@ -1,6 +1,11 @@
 <script setup lang="ts">
+import { useUserStore } from "~/stores/userStore";
+
+const userStore = useUserStore();
+
 definePageMeta({
   layout: "login",
+  middleware: "auth",
 });
 
 const credentials = reactive({
@@ -40,6 +45,16 @@ async function handleLogin() {
   loading.value = false;
 
   if (response.success) {
+    const data = {
+      name: response.success.name_user,
+      email: response.success.email,
+      token: response.success.token,
+      nameRole: response.success.name_role,
+      idUser: response.success.id_user,
+    };
+
+    userStore.login(data);
+
     await navigateTo("/");
     toast.add({
       icon: "i-heroicons-check-circle",

@@ -27,7 +27,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install --no-package-lock
+        run: npm install
 
       - name: Run tests with coverage
         run: npm run test:coverage
@@ -35,16 +35,16 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: SonarQube Scan and Upload
+      - name: Run SonarCloud scan
         uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
             -Dsonar.projectKey=iNineBD_Track-5Sem2025Front
             -Dsonar.organization=ininetrack
             -Dsonar.sources=.
+            -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/**
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.verbose=true
-#            -Dsonar.branch.name=${{ github.head_ref }}  # A branch que está sendo analisada no PR
-            
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            -Dsonar.branch.name=${{ github.head_ref }}

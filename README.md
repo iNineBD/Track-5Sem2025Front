@@ -60,17 +60,3 @@ To generate test coverage (report for Sonar or visualization):
 ```bash
 npm run test:coverage
 ```
-
-After the ```test:coverage``` command, you can open the ```index.html``` to be able to evaluate locally through the browser the code coverage and tests executed.
-
-- Windows:
-
-```bash
-start coverage/lcov-report/index.html
-```
-
-- Linux:
-
-```bash
-xdg-open coverage/lcov-report/index.html
-```

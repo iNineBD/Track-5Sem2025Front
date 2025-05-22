@@ -1,0 +1,49 @@
+name: Build, Test and SonarCloud on Merge to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-analyze:
+    if: |
+      startsWith(github.event.head_commit.message, 'Merge pull request') &&
+      (contains(github.event.head_commit.message, 'sprint-1') ||
+       contains(github.event.head_commit.message, 'sprint-2') ||
+       contains(github.event.head_commit.message, 'sprint-3'))
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Build application
+        run: npm run build
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=iNineBD_Track-5Sem2025Front
+            -Dsonar.organization=ininetrack
+            -Dsonar.sources=.
+            -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/**
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.verbose=true
+            -Dsonar.branch.name=main

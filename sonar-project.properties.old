@@ -1,7 +1,7 @@
+# Identificação do projeto - SONARCLOUD TRACK
 # Unique identifier for the project in SonarCloud
-sonar.projectKey=iNineBD_Track-5Sem2025Server
+sonar.projectKey=iNineBD_Track-5Sem2025FRONT
 sonar.organization=ininetrack
-
 # This is the name and version displayed in the SonarCloud UI.
 sonar.projectName=Track-5Sem2025Front
 sonar.projectVersion=1.0

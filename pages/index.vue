@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { useProjects } from "~/composables/useProjects";
 import { useProjectStatistics } from "~/composables/useProjectStatistics";
 import { sub, format } from "date-fns";
-import type { ProjectOption, ProjectStatistics } from "~/types";
+import type { ProjectOption, ProjectStatistics, Project } from "~/types";
 import CardStatistic from "~/components/charts/card-statistic.vue";
 
 definePageMeta({
@@ -13,7 +12,11 @@ useHead({
   title: "Home - Track",
 });
 
-const { data: projects, pending: loadingProjects, error } = useProjects();
+const toast = useToast();
+
+const loadingProjects = ref(false);
+
+const projects = ref<Project[]>([]);
 
 const selectedProject = ref<ProjectOption>({
   id: null,
@@ -25,6 +28,25 @@ const selectedDateRange = ref({
   start: sub(new Date(), { days: 14 }),
   end: new Date(),
 });
+
+async function fetchProjects() {
+  loadingProjects.value = true;
+
+  const response = await useProjects();
+  loadingProjects.value = false;
+
+  if (response.success) {
+    projects.value = response.success;
+  } else {
+    toast.add({
+      icon: "i-heroicons-x-circle",
+      color: "red",
+      title: "Erro",
+      description: response.message || "Nenhum projeto encontrado.",
+      timeout: 6000,
+    });
+  }
+}
 
 const statistics = ref<ProjectStatistics | null>(null);
 const isOpen = ref(false);
@@ -47,6 +69,13 @@ const fetchStatistics = async () => {
     }
   } catch (err) {
     console.error("Erro ao buscar estatísticas:", err);
+    toast.add({
+      icon: "i-heroicons-x-circle",
+      color: "red",
+      title: "Erro",
+      description: err instanceof Error ? err.message : "Erro desconhecido",
+      timeout: 6000,
+    });
   }
 };
 
@@ -59,12 +88,9 @@ watch(
   { deep: true },
 );
 
-if (error.value) {
-  throw createError({
-    statusCode: 500,
-    statusMessage: `Falha ao carregar projetos: ${error.value}`,
-  });
-}
+onMounted(async () => {
+  fetchProjects();
+});
 </script>
 
 <template>
@@ -119,7 +145,7 @@ if (error.value) {
     <!-- Título do Projeto Selecionado -->
     <div
       v-if="selectedProject?.id && statistics"
-      class="flex flex-col md:flex-row md:gap-2 md:items-center"
+      class="flex flex-col md:gap-1"
     >
       <UText
         tag="h2"
@@ -130,10 +156,7 @@ if (error.value) {
       >
         {{ selectedProject?.label }}
       </UText>
-      <UText size="large" weight="normal" class="mb-0 mt-0 hidden md:block">
-        |
-      </UText>
-      <UText size="medium" weight="normal" class="mb-0 mt-0 line-clamp-1">
+      <UText size="small" weight="normal" class="mb-0 mt-0 line-clamp-4">
         {{ selectedProject?.description }}
       </UText>
     </div>

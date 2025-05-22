@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 
-export async function useProjects() {
+export async function useUsers() {
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 
   try {
     const response = await $api.get(
-      `${config.public.apiServer}/api/projects/data`,
+      `${config.public.apiServer}/api/usermanagement/data`,
     );
 
     return response.data;
@@ -21,7 +21,7 @@ export async function useProjects() {
       errorMessage = error.message;
     }
 
-    console.error("Erro ao buscar projetos:", errorMessage);
+    console.error("Erro ao buscar usuários:", errorMessage);
 
     return {
       success: false,

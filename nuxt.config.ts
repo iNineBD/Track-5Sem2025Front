@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/test-utils/module",
     "@nuxt/eslint",
     "nuxt-auth-utils",
+    "@pinia/nuxt",
   ],
   runtimeConfig: {
     public: {

@@ -42,8 +42,33 @@ jobs:
           args: >
             -Dsonar.projectKey=iNineBD_Track-5Sem2025Front
             -Dsonar.organization=ininetrack
+            -Dsonar.projectName=Track-5Sem2025Front
+            -Dsonar.projectVersion=1.0
             -Dsonar.sources=.
+            -Dsonar.sourceEncoding=UTF-8
             -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/**
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.verbose=true
+            -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.branch.name=main
+            -Dsonar.verbose=true
+
+      - name: Install sonar-scanner
+        run: |
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+          unzip sonar-scanner-cli-4.8.0.2856-linux.zip
+          sudo mv sonar-scanner-4.8.0.2856-linux /opt/sonar-scanner
+          echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
+
+      - name: SonarQube Community Self-hosted
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR2_TOKEN }}
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=Track5Front \
+            -Dsonar.projectName=Track5Front \
+            -Dsonar.projectVersion=1.0 \
+            -Dsonar.sources=. \
+            -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/** \
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+            -Dsonar.host.url=http://144.22.212.19:9001 \
+            -Dsonar.login=$SONAR_TOKEN

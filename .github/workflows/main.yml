@@ -100,4 +100,4 @@ jobs:
       - name: Run sonar-scanner via npm
         env:
           SONAR_TOKEN: ${{ secrets.SONAR2_TOKEN }}
-        run: node sonar-scanner.js
+        run: node sonar-scanner.cjs

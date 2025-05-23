@@ -89,29 +89,15 @@ jobs:
           name: coverage
           path: coverage
 
-      - name: Set up Java 17 for SonarScanner
-        uses: actions/setup-java@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          distribution: 'temurin'
-          java-version: 17
+          node-version: 18
 
-      - name: Install sonar-scanner
-        run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-          unzip sonar-scanner-cli-4.8.0.2856-linux.zip
-          sudo mv sonar-scanner-4.8.0.2856-linux /opt/sonar-scanner
-          echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
+      - name: Install dependencies (for scanner)
+        run: npm install
 
-      - name: Run scan for self-hosted SonarQube
+      - name: Run sonar-scanner via npm
         env:
           SONAR_TOKEN: ${{ secrets.SONAR2_TOKEN }}
-        run: |
-          export JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17*/x64
-          export PATH="$JAVA_HOME/bin:$PATH"
-          sonar-scanner \
-            -Dsonar.projectKey=Track5Front \
-            -Dsonar.sources=. \
-            -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/** \
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
-            -Dsonar.host.url=http://144.22.212.19:9001 \
-            -Dsonar.login=$SONAR_TOKEN
+        run: node sonar-scanner.js

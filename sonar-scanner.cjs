@@ -6,7 +6,8 @@ sonarqubeScanner(
     serverUrl: "http://144.22.212.19:9001",
     token: process.env.SONAR2_TOKEN,
     options: {
-      "sonar.projectKey": "Track5Front",
+      "sonar.projectKey": "Track-5Sem2025Front",
+      "sonar.projectName": "Track-5Sem2025Front",
       "sonar.sources": ".",
       "sonar.exclusions": "**/*.spec.ts,**/*.test.ts,**/node_modules/**",
       "sonar.javascript.lcov.reportPaths": "coverage/lcov.info",

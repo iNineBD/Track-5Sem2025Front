@@ -34,6 +34,28 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/lcov.info
+
+  sonarqube-cloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+    needs: build-and-analyze
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage
+          path: coverage
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
@@ -52,34 +74,37 @@ jobs:
             -Dsonar.branch.name=main
             -Dsonar.verbose=true
 
+  sonarqube-selfhosted:
+    name: SonarQube Self-hosted Analysis
+    runs-on: ubuntu-latest
+    needs: build-and-analyze
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download coverage report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage
+          path: coverage
+
       - name: Set up Java 17 for SonarScanner
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: 17
 
-      - name: SonarQube Community Self-hosted
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies (for sonar-scanner)
+        run: npm install
+
+      - name: Run sonar-scanner via npm
         env:
           SONAR_TOKEN: ${{ secrets.SONAR2_TOKEN }}
-        run: |
-          # Força o uso do Java 17
-          export JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17*/x64
-          export PATH="$JAVA_HOME/bin:$PATH"
-
-          # Baixa o SonarScanner compatível
-          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
-          unzip -q sonar-scanner.zip
-          mv sonar-scanner-*/ sonar-scanner
-
-          # Executa com scanner local usando Java 17
-          ./sonar-scanner/bin/sonar-scanner \
-            -Dsonar.projectKey=Track5Front \
-            -Dsonar.projectName=Track5Front \
-            -Dsonar.projectVersion=1.0 \
-            -Dsonar.sources=. \
-            -Dsonar.sourceEncoding=UTF-8 \
-            -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/** \
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
-            -Dsonar.host.url=http://144.22.212.19:9001 \
-            -Dsonar.login=$SONAR_TOKEN
-            -Dsonar.verbose=true
+        run: node sonar-scanner.cjs

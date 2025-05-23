@@ -1,7 +1,7 @@
-// sonar-scanner.js
-const scanner = require("sonarqube-scanner");
+// sonar-scanner.cjs
+const sonarqubeScanner = require('sonarqube-scanner').default;
 
-scanner(
+sonarqubeScanner(
   {
     serverUrl: "http://144.22.212.19:9001",
     token: process.env.SONAR2_TOKEN,
@@ -13,5 +13,5 @@ scanner(
       "sonar.sourceEncoding": "UTF-8",
     },
   },
-  () => process.exit(),
+  () => process.exit()
 );

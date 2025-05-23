@@ -1,5 +1,5 @@
 // sonar-scanner.cjs
-const sonarqubeScanner = require('sonarqube-scanner').default;
+const sonarqubeScanner = require("sonarqube-scanner").default;
 
 sonarqubeScanner(
   {
@@ -13,5 +13,5 @@ sonarqubeScanner(
       "sonar.sourceEncoding": "UTF-8",
     },
   },
-  () => process.exit()
+  () => process.exit(),
 );

@@ -89,6 +89,12 @@ jobs:
           name: coverage
           path: coverage
 
+      - name: Set up Java 17 for SonarScanner
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
       - name: Install sonar-scanner
         run: |
           wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
@@ -106,4 +112,4 @@ jobs:
             -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/** \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.host.url=http://144.22.212.19:9001 \
-            -Dsonar.login=$SONAR2_TOKEN
+            -Dsonar.login=$SONAR_TOKEN

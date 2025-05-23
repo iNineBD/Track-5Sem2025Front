@@ -52,6 +52,12 @@ jobs:
             -Dsonar.branch.name=main
             -Dsonar.verbose=true
 
+      - name: Set up Java 17 for SonarScanner
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
       - name: Install sonar-scanner
         run: |
           wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip

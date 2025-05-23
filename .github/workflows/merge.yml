@@ -58,26 +58,28 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Install sonar-scanner
-        run: |
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-          unzip sonar-scanner-cli-4.8.0.2856-linux.zip
-          sudo mv sonar-scanner-4.8.0.2856-linux /opt/sonar-scanner
-          echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
-
       - name: SonarQube Community Self-hosted
         env:
           SONAR_TOKEN: ${{ secrets.SONAR2_TOKEN }}
         run: |
+          # Força o uso do Java 17
           export JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17*/x64
           export PATH="$JAVA_HOME/bin:$PATH"
-          java -version
-          sonar-scanner \
+
+          # Baixa o SonarScanner compatível
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+          unzip -q sonar-scanner.zip
+          mv sonar-scanner-*/ sonar-scanner
+
+          # Executa com scanner local usando Java 17
+          ./sonar-scanner/bin/sonar-scanner \
             -Dsonar.projectKey=Track5Front \
             -Dsonar.projectName=Track5Front \
             -Dsonar.projectVersion=1.0 \
             -Dsonar.sources=. \
+            -Dsonar.sourceEncoding=UTF-8 \
             -Dsonar.exclusions=**/*.spec.ts,**/*.test.ts,**/node_modules/** \
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.host.url=http://144.22.212.19:9001 \
             -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.verbose=true

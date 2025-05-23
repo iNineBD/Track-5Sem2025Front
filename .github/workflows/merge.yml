@@ -69,6 +69,8 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR2_TOKEN }}
         run: |
+          export JAVA_HOME=/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17*/x64
+          export PATH="$JAVA_HOME/bin:$PATH"
           sonar-scanner \
             -Dsonar.projectKey=Track5Front \
             -Dsonar.projectName=Track5Front \

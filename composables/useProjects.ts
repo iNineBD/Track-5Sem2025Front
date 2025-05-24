@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 
-export async function useProjects() {
+export async function useProjects(platformId: number) {
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 
   try {
     const response = await $api.get(
-      `${config.public.apiServer}/api/projects/data`,
+      `${config.public.apiServer}/api/projects/data/${platformId}`,
     );
 
     return response.data;

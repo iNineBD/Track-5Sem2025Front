@@ -15,6 +15,7 @@ const toast = useToast();
 
 const loadingProjects = ref(false);
 const loadingPlatforms = ref(false);
+const loadingStatistics = ref(false);
 
 const projects = ref<Project[]>([]);
 const platforms = ref<Platforms[]>([]);
@@ -83,45 +84,39 @@ async function fetchPlatforms() {
 const statistics = ref<ProjectStatistics | null>(null);
 const isOpen = ref(false);
 
-const fetchStatistics = async () => {
-  statistics.value = null;
-
-  if (!selectedProject.value) {
-    return;
-  }
+async function fetchStatistics() {
+  loadingStatistics.value = true;
 
   const formattedStart = format(selectedDateRange.value.start, "yyyy-MM-dd");
   const formattedEnd = format(selectedDateRange.value.end, "yyyy-MM-dd");
 
-  console.log("selectedProject", selectedProject);
+  const response = await useProjectStatistics(
+    selectedProject.value,
+    formattedStart,
+    formattedEnd,
+  );
+  loadingStatistics.value = false;
 
-  try {
-    const { projectStatistics } = await useProjectStatistics(
-      selectedProject.value,
-      formattedStart,
-      formattedEnd,
-    );
-
-    if (projectStatistics) {
-      statistics.value = projectStatistics;
-    }
-  } catch (err) {
-    console.error("Erro ao buscar estatísticas:", err);
+  if (response.success) {
+    statistics.value = response.success;
+  } else {
     toast.add({
       icon: "i-heroicons-x-circle",
       color: "red",
       title: "Erro",
-      description: err instanceof Error ? err.message : "Erro desconhecido",
+      description: response.message || "Erro ao buscar estatísticas.",
       timeout: 6000,
     });
   }
-};
+}
 
 watch(
   [selectedProject, selectedDateRange],
   () => {
     statistics.value = null;
-    fetchStatistics();
+    if (selectedProject.value) {
+      fetchStatistics();
+    }
   },
   { deep: true },
 );
@@ -142,7 +137,10 @@ onMounted(async () => {
 <template>
   <div class="flex flex-col gap-6">
     <!-- Skeleton Filtros Desktop -->
-    <div v-if="loadingProjects" class="hidden lg:grid grid-cols-4 gap-4">
+    <div
+      v-if="loadingProjects || loadingPlatforms"
+      class="hidden lg:grid grid-cols-4 gap-4"
+    >
       <div v-for="n in 4" :key="n" class="grid grid-col gap-2">
         <USkeleton class="h-4 w-36" />
         <USkeleton class="h-14 w-full" />
@@ -162,7 +160,7 @@ onMounted(async () => {
     </div>
 
     <!-- Skeleton Filtros Mobile -->
-    <div v-if="loadingProjects" class="lg:hidden">
+    <div v-if="loadingProjects || loadingPlatforms" class="lg:hidden">
       <USkeleton class="h-12 w-full" />
     </div>
 
@@ -218,7 +216,7 @@ onMounted(async () => {
     </div>
 
     <!-- Skeleton Gráficos -->
-    <div v-if="selectedProject && !statistics" class="flex flex-col gap-4">
+    <div v-if="loadingStatistics" class="flex flex-col gap-4">
       <USkeleton class="h-16 w-1/2 md:w-96" />
       <div
         class="grid grid-flow-row-dense grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-4"

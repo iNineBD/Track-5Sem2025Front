@@ -19,8 +19,15 @@ const loadingPlatforms = ref(false);
 const projects = ref<Project[]>([]);
 const platforms = ref<Platforms[]>([]);
 
-const selectedProject = ref<Project>();
+const selectedProject = ref<number>();
 const selectedPlatform = ref<number>();
+
+const projectName = computed(() => {
+  return (
+    projects.value.find((p) => p.id_project === selectedProject.value)
+      ?.name_project ?? ""
+  );
+});
 
 const selectedDateRange = ref({
   start: sub(new Date(), { days: 14 }),
@@ -39,6 +46,7 @@ async function fetchProjects() {
   const response = await useProjects(selectedPlatform.value);
   loadingProjects.value = false;
   selectedProject.value = undefined;
+  projects.value = [];
 
   if (response.success) {
     projects.value = response.success;
@@ -85,9 +93,11 @@ const fetchStatistics = async () => {
   const formattedStart = format(selectedDateRange.value.start, "yyyy-MM-dd");
   const formattedEnd = format(selectedDateRange.value.end, "yyyy-MM-dd");
 
+  console.log("selectedProject", selectedProject);
+
   try {
     const { projectStatistics } = await useProjectStatistics(
-      selectedProject.value.id_project,
+      selectedProject.value,
       formattedStart,
       formattedEnd,
     );
@@ -193,10 +203,10 @@ onMounted(async () => {
         weight="semi-bold"
         class="mb-0 mt-0 line-clamp-1"
       >
-        {{ selectedProject.name_project }}
+        {{ projectName }}
       </UText>
       <UText size="small" weight="normal" class="mb-0 mt-0 line-clamp-4">
-        {{ selectedProject.description }}
+        {{ projectName }}
       </UText>
     </div>
 

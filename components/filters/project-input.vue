@@ -5,7 +5,7 @@ const props = defineProps<{
   projects: Project[];
 }>();
 
-const model = defineModel<Project>();
+const model = defineModel<number>();
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const model = defineModel<Project>();
       :options="
         props.projects.map((project) => ({
           label: project.name_project,
-          value: project,
+          value: project.id_project,
         }))
       "
     />

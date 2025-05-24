@@ -9,7 +9,7 @@ const props = defineProps<{
 }>();
 
 const modelDateRange = defineModel<{ start: Date; end: Date }>("dateRange");
-const modelProject = defineModel<Project>("project");
+const modelProject = defineModel<number>("project");
 const modelPlatform = defineModel<number>("platform");
 
 const dateRange = ref<{ start: Date; end: Date }>(

@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { CalendarPicker } from "#components";
-import type { Project, ProjectOption } from "~/types";
+import type { Project, Platforms } from "~/types";
 
 const props = defineProps<{
   projects: Project[];
+  platforms: Platforms[];
+  selectedProject: boolean;
 }>();
 
 const modelDateRange = defineModel<{ start: Date; end: Date }>("dateRange");
-const modelProject = defineModel<ProjectOption>("project");
+const modelProject = defineModel<Project>("project");
+const modelPlatform = defineModel<number>("platform");
 
 const dateRange = ref<{ start: Date; end: Date }>(
   modelDateRange.value &&
@@ -25,12 +28,13 @@ watch(dateRange, (val) => {
 
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
+    <PlatformsInput v-model="modelPlatform" :platforms="props.platforms" />
     <ProjectInput v-model="modelProject" :projects="props.projects" />
     <div class="flex flex-col">
       <UText tag="p" size="large" weight="semi-bold" class="mt-0">
         Selecione o período
       </UText>
-      <CalendarPicker v-model="dateRange" />
+      <CalendarPicker v-model="dateRange" :is-disabled="selectedProject" />
     </div>
   </div>
 </template>

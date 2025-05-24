@@ -2,15 +2,7 @@ export interface Project {
   id_project: number;
   name_project: string;
   description: string;
-  avatar?: string;
 }
-
-export interface ProjectOption {
-  id: number | null;
-  label: string;
-  description: string;
-}
-
 export interface CardStatusItem {
   status: string;
   qtd: number;
@@ -66,4 +58,9 @@ export interface User {
 export interface Role {
   id_role: number;
   name_role: string;
+}
+
+export interface Platforms {
+  id_platform: number;
+  nome_platform: string;
 }

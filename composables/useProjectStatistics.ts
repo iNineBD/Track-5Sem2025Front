@@ -1,29 +1,35 @@
+import { AxiosError } from "axios";
+
 export async function useProjectStatistics(
-  projectId: number | null,
+  projectId: number | undefined,
   start: string,
   end: string,
 ) {
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 
-  if (!start || !end) {
-    throw new Error("Os parâmetros 'data1' e 'data2' são obrigatórios.");
-  }
-
   try {
-    const queryParams = new URLSearchParams();
-    queryParams.append("data1", start);
-    queryParams.append("data2", end);
-
     const response = await $api.get(
-      `${config.public.apiServer}/api/statistics/data/${projectId}?${queryParams.toString()}`,
+      `${config.public.apiServer}/api/statistics/data/${projectId}?data1=${start}&data2=${end}`,
     );
-    return { projectStatistics: response.data.success };
+
+    return response.data;
   } catch (error) {
-    console.error("Erro ao buscar projetos:", error);
+    let errorMessage;
+
+    if (error instanceof AxiosError && error.response) {
+      if (error.response.data && error.response.data.error) {
+        errorMessage = error.response.data.error;
+      }
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    console.error("Erro ao buscar dados do projeto:", errorMessage);
+
     return {
-      projects: [],
-      error: error instanceof Error ? error.message : "Erro desconhecido",
+      success: false,
+      message: errorMessage,
     };
   }
 }

@@ -7,9 +7,6 @@ export async function useUpdateRole({
   id_role: number;
   id_user: number;
 }) {
-  // Debug log to verify correct parameter values
-  console.log("Updating user role", { id_role, id_user });
-
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 

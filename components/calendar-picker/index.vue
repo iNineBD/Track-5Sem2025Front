@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { sub, isSameDay, type Duration } from "date-fns";
 
+const props = defineProps<{
+  isDisabled: boolean;
+}>();
+
 const modelValue = defineModel<{ start: Date; end: Date }>();
 
 const ranges = [
@@ -44,6 +48,7 @@ function formatDate(date: Date) {
       variant="solid"
       color="white"
       block
+      :disabled="props.isDisabled"
     >
       {{ formatDate(selected?.start ?? new Date()) }} -
       {{ formatDate(selected?.end ?? new Date()) }}

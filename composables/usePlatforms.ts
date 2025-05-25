@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 
-export async function useProjects(platformId: number) {
+export async function usePlatforms() {
   const { $api } = useNuxtApp();
   const config = useRuntimeConfig();
 
   try {
     const response = await $api.get(
-      `${config.public.apiServer}/api/projects/data/${platformId}`,
+      `${config.public.apiServer}/api/platforms/data`,
     );
 
     return response.data;
@@ -21,7 +21,7 @@ export async function useProjects(platformId: number) {
       errorMessage = error.message;
     }
 
-    console.error("Erro ao buscar projetos:", errorMessage);
+    console.error("Erro ao buscar plataformas:", errorMessage);
 
     return {
       success: false,

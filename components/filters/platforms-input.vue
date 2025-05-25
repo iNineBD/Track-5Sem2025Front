@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Project } from "~/types";
+import type { Platforms } from "~/types";
 
 const props = defineProps<{
-  projects: Project[];
+  platforms: Platforms[];
 }>();
 
 const model = defineModel<number>();
@@ -11,18 +11,17 @@ const model = defineModel<number>();
 <template>
   <div class="flex flex-col">
     <UText tag="p" size="large" weight="semi-bold" class="mt-0">
-      Selecione o projeto
+      Selecione a plataforma
     </UText>
     <USelect
       v-model="model"
-      :disabled="!props.projects.length"
-      placeholder="projeto..."
+      placeholder="plataforma..."
       class="min-w-52"
       size="xl"
       :options="
-        props.projects.map((project) => ({
-          label: project.name_project,
-          value: project.id_project,
+        props.platforms.map((platform) => ({
+          label: platform.nome_platform,
+          value: platform.id_platform,
         }))
       "
     />

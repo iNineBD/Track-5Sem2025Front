@@ -166,7 +166,7 @@ const rows = computed(() => {
       <div
         :class="[
           'flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700',
-          pageCount > 1 ? 'hidden' : 'block',
+          pageCount > 1 ? 'block' : 'hidden',
         ]"
       >
         <UPagination

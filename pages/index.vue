@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { useProjectStatistics } from "~/composables/useProjectStatistics";
 import { sub, format } from "date-fns";
-import type { ProjectOption, ProjectStatistics, Project } from "~/types";
+import type { ProjectStatistics, Project, Platforms } from "~/types";
 import CardStatistic from "~/components/charts/card-statistic.vue";
 
 definePageMeta({
@@ -15,13 +14,20 @@ useHead({
 const toast = useToast();
 
 const loadingProjects = ref(false);
+const loadingPlatforms = ref(false);
+const loadingStatistics = ref(false);
 
 const projects = ref<Project[]>([]);
+const platforms = ref<Platforms[]>([]);
 
-const selectedProject = ref<ProjectOption>({
-  id: null,
-  label: "Selecione um Projeto",
-  description: "",
+const selectedProject = ref<number>();
+const selectedPlatform = ref<number>();
+
+const projectName = computed(() => {
+  return (
+    projects.value.find((p) => p.id_project === selectedProject.value)
+      ?.name_project ?? ""
+  );
 });
 
 const selectedDateRange = ref({
@@ -32,8 +38,16 @@ const selectedDateRange = ref({
 async function fetchProjects() {
   loadingProjects.value = true;
 
-  const response = await useProjects();
+  if (!selectedPlatform.value) {
+    projects.value = [];
+    loadingProjects.value = false;
+    return;
+  }
+
+  const response = await useProjects(selectedPlatform.value);
   loadingProjects.value = false;
+  selectedProject.value = undefined;
+  projects.value = [];
 
   if (response.success) {
     projects.value = response.success;
@@ -48,55 +62,85 @@ async function fetchProjects() {
   }
 }
 
-const statistics = ref<ProjectStatistics | null>(null);
-const isOpen = ref(false);
+async function fetchPlatforms() {
+  loadingPlatforms.value = true;
 
-const fetchStatistics = async () => {
-  statistics.value = null;
+  const response = await usePlatforms();
+  loadingPlatforms.value = false;
 
-  const formattedStart = format(selectedDateRange.value.start, "yyyy-MM-dd");
-  const formattedEnd = format(selectedDateRange.value.end, "yyyy-MM-dd");
-
-  try {
-    const { projectStatistics } = await useProjectStatistics(
-      selectedProject.value.id,
-      formattedStart,
-      formattedEnd,
-    );
-
-    if (projectStatistics) {
-      statistics.value = projectStatistics;
-    }
-  } catch (err) {
-    console.error("Erro ao buscar estatísticas:", err);
+  if (response.success) {
+    platforms.value = response.success;
+  } else {
     toast.add({
       icon: "i-heroicons-x-circle",
       color: "red",
       title: "Erro",
-      description: err instanceof Error ? err.message : "Erro desconhecido",
+      description: response.message || "Nenhuma plataforma encontrado.",
       timeout: 6000,
     });
   }
-};
+}
+
+const statistics = ref<ProjectStatistics | null>(null);
+const isOpen = ref(false);
+
+async function fetchStatistics() {
+  loadingStatistics.value = true;
+
+  const formattedStart = format(selectedDateRange.value.start, "yyyy-MM-dd");
+  const formattedEnd = format(selectedDateRange.value.end, "yyyy-MM-dd");
+
+  const response = await useProjectStatistics(
+    selectedProject.value,
+    formattedStart,
+    formattedEnd,
+  );
+  loadingStatistics.value = false;
+
+  if (response.success) {
+    statistics.value = response.success;
+  } else {
+    toast.add({
+      icon: "i-heroicons-x-circle",
+      color: "red",
+      title: "Erro",
+      description: response.message || "Erro ao buscar estatísticas.",
+      timeout: 6000,
+    });
+  }
+}
 
 watch(
   [selectedProject, selectedDateRange],
   () => {
     statistics.value = null;
-    fetchStatistics();
+    if (selectedProject.value) {
+      fetchStatistics();
+    }
+  },
+  { deep: true },
+);
+
+watch(
+  [selectedPlatform],
+  () => {
+    fetchProjects();
   },
   { deep: true },
 );
 
 onMounted(async () => {
-  fetchProjects();
+  fetchPlatforms();
 });
 </script>
 
 <template>
   <div class="flex flex-col gap-6">
     <!-- Skeleton Filtros Desktop -->
-    <div v-if="loadingProjects" class="hidden lg:grid grid-cols-4 gap-4">
+    <div
+      v-if="loadingProjects || loadingPlatforms"
+      class="hidden lg:grid grid-cols-4 gap-4"
+    >
       <div v-for="n in 4" :key="n" class="grid grid-col gap-2">
         <USkeleton class="h-4 w-36" />
         <USkeleton class="h-14 w-full" />
@@ -108,12 +152,15 @@ onMounted(async () => {
       <filters
         v-model:date-range="selectedDateRange"
         v-model:project="selectedProject"
+        v-model:platform="selectedPlatform"
         :projects="projects"
+        :platforms="platforms"
+        :selected-project="!selectedProject"
       />
     </div>
 
     <!-- Skeleton Filtros Mobile -->
-    <div v-if="loadingProjects" class="lg:hidden">
+    <div v-if="loadingProjects || loadingPlatforms" class="lg:hidden">
       <USkeleton class="h-12 w-full" />
     </div>
 
@@ -134,7 +181,10 @@ onMounted(async () => {
           <filters
             v-model:date-range="selectedDateRange"
             v-model:project="selectedProject"
+            v-model:platform="selectedPlatform"
             :projects="projects"
+            :platforms="platforms"
+            :selected-project="!selectedProject"
           />
         </div>
       </UModal>
@@ -143,10 +193,7 @@ onMounted(async () => {
     <UDivider />
 
     <!-- Título do Projeto Selecionado -->
-    <div
-      v-if="selectedProject?.id && statistics"
-      class="flex flex-col md:gap-1"
-    >
+    <div v-if="selectedProject && statistics" class="flex flex-col md:gap-1">
       <UText
         tag="h2"
         size="title"
@@ -154,22 +201,22 @@ onMounted(async () => {
         weight="semi-bold"
         class="mb-0 mt-0 line-clamp-1"
       >
-        {{ selectedProject?.label }}
+        {{ projectName }}
       </UText>
       <UText size="small" weight="normal" class="mb-0 mt-0 line-clamp-4">
-        {{ selectedProject?.description }}
+        {{ projectName }}
       </UText>
     </div>
 
     <!-- Gráficos -->
-    <div v-if="!selectedProject?.id && !statistics">
+    <div v-if="!selectedProject && !statistics">
       <UText size="large" weight="normal" color="gray" align="center">
         Nenhum projeto selecionado
       </UText>
     </div>
 
     <!-- Skeleton Gráficos -->
-    <div v-if="selectedProject?.id && !statistics" class="flex flex-col gap-4">
+    <div v-if="loadingStatistics" class="flex flex-col gap-4">
       <USkeleton class="h-16 w-1/2 md:w-96" />
       <div
         class="grid grid-flow-row-dense grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 gap-4"

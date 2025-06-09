@@ -1,4 +1,4 @@
-name: Build, Test and SonarCloud
+name: Build, Test and Sonar Analysis
 
 on:
   pull_request:
@@ -7,34 +7,42 @@ on:
       - 'sprint-1'
       - 'sprint-2'
       - 'sprint-3'
- 
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x] # Versão LTS recomendada para Nuxt 3
+        node-version: [18.x]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Isso garante que o clone seja completo e com o histórico completo de commits
+          fetch-depth: 0 # important for SonarQube PR analysis
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run tests with coverage
         run: npm run test:coverage
 
       - name: Build application
         run: npm run build
-      
+
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
@@ -42,14 +50,15 @@ jobs:
           path: coverage/lcov.info
 
   sonarqube-cloud:
-    name: SonarQube Cloud
+    name: SonarCloud Analysis
     runs-on: ubuntu-latest
     needs: build-and-test
+
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-          
+          fetch-depth: 0
+
       - name: Download coverage report
         uses: actions/download-artifact@v4
         with:
@@ -57,7 +66,7 @@ jobs:
           path: coverage
 
       - name: Run SonarCloud scan
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
@@ -77,11 +86,14 @@ jobs:
             -Dsonar.verbose=true
 
   sonarqube-selfhosted:
-    name: SonarQube Community Self-hosted
+    name: SonarQube Self-hosted Analysis
     runs-on: ubuntu-latest
     needs: build-and-test
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Download coverage report
         uses: actions/download-artifact@v4
@@ -89,15 +101,18 @@ jobs:
           name: coverage
           path: coverage
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Java 17 for SonarScanner
+        uses: actions/setup-java@v4
         with:
-          node-version: 18
+          distribution: 'temurin'
+          java-version: 17
 
-      - name: Install dependencies (for scanner)
-        run: npm install
-
-      - name: Run sonar-scanner via npm
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR2_TOKEN }}
-        run: node sonar-scanner.cjs
+      - name: Run SonarQube Scanner (Self-hosted)
+        uses: sonarsource/sonarqube-scan-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=Track-5Sem2025Front
+            -Dsonar.sources=.
+            -Dsonar.host.url=http://144.22.212.19:9001
+            -Dsonar.login=${{ secrets.SONAR2_TOKEN }}
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info

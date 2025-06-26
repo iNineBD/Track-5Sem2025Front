@@ -1,0 +1,24 @@
+# Conteúdo do arquivo: Track-5Sem2025Front/git-hooks/commit-msg
+
+#!/bin/bash
+
+commit_msg_file="$1"
+expected_pattern="^(TRK-[0-9]+ - (feat|fix|release|hotfix): )"
+first_line=$(head -n 1 "$commit_msg_file")
+
+if [[ ! "$first_line" =~ $expected_pattern ]]; then
+    echo ""
+    echo "===================================================================================="
+    echo "  ERRO: Sua mensagem de commit não segue o padrão exigido."
+    echo "  A mensagem DEVE começar com uma das seguintes opções:"
+    echo "  - TRK-XXX - feat: Sua mensagem"
+    echo "  - TRK-XXX - fix: Sua mensagem"
+    echo "  - TRK-XXX - release: Sua mensagem"
+    echo "  - TRK-XXX - hotfix: Sua mensagem"
+    echo "  Onde 'XXX' é o número da sua tarefa do Jira (ex: TRK-106)."
+    echo "===================================================================================="
+    echo ""
+    exit 1
+fi
+
+exit 0

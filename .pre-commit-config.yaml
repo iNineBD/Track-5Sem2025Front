@@ -1,17 +1,9 @@
-# Conteúdo do arquivo: .pre-commit-config.yaml
-# Define a versão mínima exigida do pre-commit
-minimum_pre_commit_version: '3.0.0'
-
 repos:
   - repo: local
     hooks:
       - id: validate-jira-commit-msg
         name: "Valida mensagem de commit TRK-XXX"
-        # O 'language: system' vai usar o shell nativo (bash no Git Bash)
         language: system
-        # Use o operador literal '|' para strings multilinha
-        # O 'entry' é o comando shell que será executado para validar a mensagem
-        # O '$1' refere-se ao arquivo temporário da mensagem de commit
         entry: |
           bash -c '
             commit_msg_file="$1";
@@ -33,7 +25,5 @@ repos:
             fi;
             exit 0;
           '
-        # O '$1' no script 'entry' acima será o caminho para este arquivo
         args: [".git/COMMIT_EDITMSG"]
-        # Este hook é executado no estágio 'commit-msg' do Git
         stages: [commit-msg]

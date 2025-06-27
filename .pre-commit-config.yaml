@@ -4,10 +4,6 @@ repos:
       - id: validate-jira-commit-msg
         name: "Valida mensagem de commit TRK-XXX"
         language: system
-        # O 'entry' usa bash -c para executar um comando em linha única.
-        # 'grep -qE' procura pelo padrão, -q (quiet) suprime a saída, -E habilita regex estendidas.
-        # O '$1' é o caminho para o arquivo temporário da mensagem de commit.
-        # A lógica Bash simples: se grep falhar (!), imprime o erro e sai com 1 (abortando o commit).
         entry: bash -c 'if ! grep -qE "^TRK-[0-9]+[[:space:]]-[[:space:]](feat|fix|release|hotfix):" "$1"; then echo "ERROR --> Commit fora do padrão TRK-XXX - feat|fix|release|hotfix:"; exit 1; fi'
         args: [".git/COMMIT_EDITMSG"]
         stages: [commit-msg]

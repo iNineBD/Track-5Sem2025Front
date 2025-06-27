@@ -1,29 +1,16 @@
+# .pre-commit-config.yaml
+minimum_pre_commit_version: '3.0.0'
+
 repos:
   - repo: local
     hooks:
       - id: validate-jira-commit-msg
         name: "Valida mensagem de commit TRK-XXX"
         language: system
-        entry: |
-          bash -c '
-            commit_msg_file="$1";
-            first_line=$(head -n 1 "$commit_msg_file");
-            expected_pattern="^(TRK-[0-9]+ - (feat|fix|release|hotfix): )";
-            if [[ ! "$first_line" =~ $expected_pattern ]]; then
-                echo "";
-                echo "====================================================================================";
-                echo "  ERRO: Sua mensagem de commit não segue o padrão exigido.";
-                echo "  A mensagem DEVE começar com uma das seguintes opções:";
-                echo "  - TRK-XXX - feat: Sua mensagem";
-                echo "  - TRK-XXX - fix: Sua mensagem";
-                echo "  - TRK-XXX - release: Sua mensagem";
-                echo "  - TRK-XXX - hotfix: Sua mensagem";
-                echo "  Onde 'XXX' é o número da sua tarefa do Jira (ex: TRK-106).";
-                echo "====================================================================================";
-                echo "";
-                exit 1;
-            fi;
-            exit 0;
-          '
+        # O 'entry' usa bash -c para executar um comando em linha única.
+        # 'grep -qE' procura pelo padrão, -q (quiet) suprime a saída, -E habilita regex estendidas.
+        # O '$1' é o caminho para o arquivo temporário da mensagem de commit.
+        # A lógica Bash simples: se grep falhar (!), imprime o erro e sai com 1 (abortando o commit).
+        entry: bash -c 'if ! grep -qE "^TRK-[0-9]+[[:space:]]-[[:space:]](feat|fix|release|hotfix):" "$1"; then echo "ERROR --> Commit fora do padrão TRK-XXX - feat|fix|release|hotfix:"; exit 1; fi'
         args: [".git/COMMIT_EDITMSG"]
         stages: [commit-msg]

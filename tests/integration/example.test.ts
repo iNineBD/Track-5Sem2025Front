@@ -1,8 +1,8 @@
 // tests/integration/example.test.ts
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from "vitest";
 
-describe('Integration Test Suite', () => {
-  it('should perform a basic integration check', () => {
+describe("Integration Test Suite", () => {
+  it("should perform a basic integration check", () => {
     // Este é um teste de integração de exemplo.
     // Você pode adicionar lógica que testa a interação entre componentes,
     // ou chamadas a APIs (mockadas ou reais, dependendo do seu setup).

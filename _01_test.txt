@@ -1,1 +1,0 @@
-Apenas um teste Deploy, branch (TRK-106-implement-sonar-qube)

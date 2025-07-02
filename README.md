@@ -42,6 +42,29 @@ Install the project dependencies with the command:
 npm install
 ```
 
+## Standardization of git commit
+
+After cloning and installing the dependencies, it is necessary to activate the git commit standardization, file `.pre-commit-config.yaml`, follow with the commands:
+
+```bash
+mv .git/hooks/pre-commit.sample .git/hooks/pre-commit.sample.old
+
+pre-commit install --hook-type commit-msg --hook-type pre-commi
+```
+
+## Lint to validate the code convention
+To check code with indentation and convention, use lint
+
+```bash
+npm run prettier:check
+```
+
+For automatic correction
+
+```bash
+npm run lint:fix
+```
+
 ## Running the Project
 To run the project, execute the following command:
 
@@ -55,7 +78,7 @@ Access the project at [http://localhost:3000/](http://localhost:3000/).
 
 ## To test and evaluate code coverage
 
-To generate test coverage (report for Sonar or visualization):
+To perform unit testing and code coverage, generating a report in the `coverage` directory at the root of the project with `.html`, `.json` and `.info` files that can be used in SonarCloud.
 
 ```bash
 npm run test:coverage

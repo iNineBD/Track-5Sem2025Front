@@ -3,7 +3,6 @@ name: Build, Test and Sonar Analysis
 on:
   push:
     branches: ["**"] # Executa em qualquer push
-	
   pull_request:
     branches: ["**"] # Executa em qualquer PR
 

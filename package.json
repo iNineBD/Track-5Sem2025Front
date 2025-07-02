@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare",
     "test": "vitest",
     "test:coverage": "vitest run --coverage.enabled true --coverage.reports lcov,html --coverage.reportDir coverage",
+    "test:integration": "vitest run --dir tests/integration",
     "lint": "eslint . --ext .js,.ts,.vue",
     "lint:fix": "eslint . --ext .js,.ts,.vue --fix && prettier --write \"{components,pages,plugins,middleware,layouts,composables,assets}/**/*.{js,jsx,ts,tsx,vue,html,css,scss,json,md}\"",
     "prettier:check": "prettier --check \"{components,pages,plugins,middleware,layouts,composables,assets}/**/*.{js,jsx,ts,tsx,vue,html,css,scss,json,md}\"",

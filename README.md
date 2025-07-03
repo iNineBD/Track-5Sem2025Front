@@ -42,7 +42,7 @@ After cloning and installing the dependencies, it is necessary to activate the g
 ```bash
 mv .git/hooks/pre-commit.sample .git/hooks/pre-commit.sample.old
 
-pre-commit install --hook-type commit-msg --hook-type pre-commi
+pre-commit install --hook-type commit-msg --hook-type pre-commit
 ```
 
 ## Lint to validate the code convention
